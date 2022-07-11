@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/macpaw-frontend-test/static/css/main.7acaea2f.css",
-    "main.js": "/macpaw-frontend-test/static/js/main.07d3183d.js",
+    "main.js": "/macpaw-frontend-test/static/js/main.dd70b5f0.js",
     "index.html": "/macpaw-frontend-test/index.html",
     "main.7acaea2f.css.map": "/macpaw-frontend-test/static/css/main.7acaea2f.css.map",
-    "main.07d3183d.js.map": "/macpaw-frontend-test/static/js/main.07d3183d.js.map"
+    "main.dd70b5f0.js.map": "/macpaw-frontend-test/static/js/main.dd70b5f0.js.map"
   },
   "entrypoints": [
     "static/css/main.7acaea2f.css",
-    "static/js/main.07d3183d.js"
+    "static/js/main.dd70b5f0.js"
   ]
 }
