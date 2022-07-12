@@ -1,0 +1,8 @@
+.logo_svg {
+    fill: var(--main-text-color);
+    width: 106px;
+    height: 24px;
+
+    margin-left: 121px;
+    margin-top: 38px;
+}
