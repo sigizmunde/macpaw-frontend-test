@@ -1,36 +1,27 @@
-import css from './MainMenu.module.css';
+import { MenuBtn, MenuItem, MenuLink, MenuList } from './MainMenu.styled';
 
-const MainMenu = () => {
+const MainMenu = ({ onClick }) => {
   return (
-    <ul className={css.main_menu}>
-      <li className={css.menu_item}>
-        <div className={css.voting}>
-          <img src={require('../../images/vote-table.png')} alt="voting"></img>
-        </div>
-        <button type="button" className={css.menu_btn}>
-          Voting
-        </button>
-      </li>
-      <li className={css.menu_item}>
-        <div className={css.breeds}>
-          <img src={require('../../images/pet-breeds.png')} alt="breeds"></img>
-        </div>
-        <button type="button" className={css.menu_btn}>
-          Breeds
-        </button>
-      </li>
-      <li className={css.menu_item}>
-        <div className={css.gallery}>
-          <img
-            src={require('../../images/images-search.png')}
-            alt="gallery"
-          ></img>
-        </div>
-        <button type="button" className={css.menu_btn}>
-          Gallery
-        </button>
-      </li>
-    </ul>
+    <MenuList className="main_menu">
+      <MenuItem>
+        <MenuLink color="blue" onClick={() => onClick('voting')}>
+          <img src={require('../../images/vote-table.png')} alt="voting" />
+        </MenuLink>
+        <MenuBtn type="button">Voting</MenuBtn>
+      </MenuItem>
+      <MenuItem>
+        <MenuLink color="green" onClick={() => onClick('breeds')}>
+          <img src={require('../../images/pet-breeds.png')} alt="breeds" />
+        </MenuLink>
+        <MenuBtn type="button">Breeds</MenuBtn>
+      </MenuItem>
+      <MenuItem>
+        <MenuLink color="yellow" onClick={() => onClick('gallery')}>
+          <img src={require('../../images/images-search.png')} alt="gallery" />
+        </MenuLink>
+        <MenuBtn type="button">Gallery</MenuBtn>
+      </MenuItem>
+    </MenuList>
   );
 };
 

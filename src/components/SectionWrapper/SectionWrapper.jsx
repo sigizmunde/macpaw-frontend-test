@@ -12,7 +12,9 @@ export const Main = styled.main`
   display: flex;
   flex-basis: auto;
   gap: 0;
+  padding: 20px;
   background-color: var(--back-color);
   color: var(--main-text-color);
   height: 100vh;
+  overflow: hidden;
 `;

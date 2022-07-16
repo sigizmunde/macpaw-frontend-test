@@ -1,14 +1,14 @@
 import MainMenu from 'components/MainMenu/MainMenu';
-import css from './ControlSection.module.css';
+import { Section, H1, Description, Motto } from './ControlSection.styled';
 
-const ControlSection = () => {
+const ControlSection = ({ onClick }) => {
   return (
-    <section className={css.control_section}>
-      <h1 className={css.heading}>Hi intern!</h1>
-      <p className={css.description}>Welcome to MI 2022 Front-end test</p>
-      <p className={css.motto}>Lets start using The Dog API</p>
-      <MainMenu />
-    </section>
+    <Section>
+      <H1>Hi intern!</H1>
+      <Description>Welcome to MI 2022 Front-end test</Description>
+      <Motto>Lets start using The Dog API</Motto>
+      <MainMenu onClick={onClick} />
+    </Section>
   );
 };
 
