@@ -1,8 +1,12 @@
-const GalleryItem = ({ id, imageURL, onClick }) => {
+import { GalleryLi } from './GalleryItem.styled';
+
+const GalleryItem = ({ id, imageURL, widthKoef, onClick }) => {
   return (
-    <div id={id} onClick={onClick}>
-      <img src={imageURL} alt="preview" />
-    </div>
+    <GalleryLi id={id} onClick={onClick} widthKoef={widthKoef}>
+      <div>
+        <img src={imageURL} alt="preview" />
+      </div>
+    </GalleryLi>
   );
 };
 

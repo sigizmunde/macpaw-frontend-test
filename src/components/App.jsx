@@ -5,10 +5,13 @@ import Gallery from './Gallery/Gallery';
 import Logo from './Logo/Logo';
 import ControlSection from './ControlSection/ControlSection';
 import StartImage from './StartImage/StartImage';
+import HeaderForm from './HeaderForm/HeaderForm';
+import BreedsPanel from './BreedsPanel/BreedsPanel';
 
 export const App = () => {
   const [items, setItems] = useState([]);
   const [activeId, setActiveId] = useState('');
+  const [query, setQuery] = useState('');
   const [mode, setMode] = useState('start');
 
   const loadData = () => {
@@ -23,6 +26,10 @@ export const App = () => {
     setMode(mode);
   };
 
+  const handleSearch = search => {
+    setQuery(search);
+  };
+
   return (
     <Main>
       <SectionWrapper>
@@ -30,6 +37,7 @@ export const App = () => {
         <ControlSection onClick={changeMode} />
       </SectionWrapper>
       <SectionWrapper>
+        {mode !== 'start' && <HeaderForm onBreedSearch={handleSearch} />}
         {mode === 'start' && (
           <StartImage />
           // <>
@@ -39,9 +47,10 @@ export const App = () => {
           //   </button>
           // </>
         )}
-        {items.length > 0 && (
+        {mode === 'breeds' && <BreedsPanel />}
+        {/* {items.length > 0 && (
           <Gallery items={items} handleClick={handleClick} />
-        )}
+        )} */}
       </SectionWrapper>
     </Main>
   );
