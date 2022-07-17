@@ -2,7 +2,7 @@
   "name": "macpaw-frontend-test",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://sigizmunde.github.io/macpaw-frontend-test/",
+  "homepage": "https://macpaw-frontend-test.netlify.app",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
