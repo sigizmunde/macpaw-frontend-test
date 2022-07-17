@@ -8,24 +8,25 @@ import ControlSection from './ControlSection/ControlSection';
 import StartImage from './StartImage/StartImage';
 import HeaderForm from './HeaderForm/HeaderForm';
 import BreedsPanel from './BreedsPanel/BreedsPanel';
+import BreedInfo from './BreedInfo/BreedInfo';
+import { useEffect } from 'react';
 
 const modeContext = createContext('start');
 
 export const useModeContext = () => useContext(modeContext);
 
 export const App = () => {
-  const [items, setItems] = useState([]);
-  const [activeId, setActiveId] = useState('');
   const [query, setQuery] = useState('');
   const [mode, setMode] = useState('start');
   const [darkTheme, setDarkTheme] = useState(false);
+  const [currentBreed, setCurrentBreed] = useState('');
 
-  const loadData = () => {
-    fetchDogImages().then(data => setItems(data));
-  };
+  useEffect(() => {
+    setCurrentBreed('');
+  }, [mode]);
 
-  const handleClick = id => {
-    this.setActiveId(id);
+  const handleBreedClick = id => {
+    setCurrentBreed(id);
   };
 
   const changeMode = mode => {
@@ -39,7 +40,7 @@ export const App = () => {
   const toggleDarkTheme = () => setDarkTheme(dark => !dark);
 
   return (
-    <modeContext.Provider value={mode}>
+    <modeContext.Provider value={{ mode, setMode }}>
       <Main className={darkTheme && css.darktheme}>
         <ControlSection
           onClick={changeMode}
@@ -56,7 +57,12 @@ export const App = () => {
             //   </button>
             // </>
           )}
-          {mode === 'breeds' && <BreedsPanel />}
+          {mode === 'breeds' && currentBreed === '' && (
+            <BreedsPanel onImageClick={handleBreedClick} />
+          )}
+          {mode === 'breeds' && currentBreed !== '' && (
+            <BreedInfo breedId={currentBreed} />
+          )}
           {/* {items.length > 0 && (
           <Gallery items={items} handleClick={handleClick} />
         )} */}

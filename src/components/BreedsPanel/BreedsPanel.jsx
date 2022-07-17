@@ -6,10 +6,8 @@ import {
   TextBtn,
   FormWrapper,
   PanelWrapper,
-  Panel,
   Svg,
   Svg180,
-  PanelBtn,
 } from 'components/StyledBlocks/StyledBlocks';
 import Icons from 'images/icons/symbol-defs.svg';
 import SelectInput from 'components/SelectInput/SelectInput';
@@ -32,14 +30,13 @@ function usePreviousValue(value) {
   return ref.current;
 }
 
-const BreedsPanel = () => {
+const BreedsPanel = ({ onImageClick }) => {
   const [breedArray, setBreedArray] = useState([]);
   const [breedId, setBreedId] = useState('');
   const [limit, setLimit] = useState('10');
   const [page, setPage] = useState(0);
   const [imgCount, setImgCount] = useState(0);
   const [images, setImages] = useState([]);
-  const [activeImageId, setActiveImageId] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -89,15 +86,15 @@ const BreedsPanel = () => {
     if (!prevSortZ && sortingZ) setSortingA(false);
   }, [sortingZ, prevSortZ]);
 
-  const handleClick = id => {
-    setActiveImageId(id);
+  const handleClick = imageBreedId => {
+    onImageClick(imageBreedId);
   };
 
   return (
     <PanelWrapper>
       <ContentPanel>
         <FormWrapper>
-          <BackBtn />
+          <BackBtn destination="start" />
           <TextBtn type="button">Breeds</TextBtn>
           <SelectInput
             items={breedArray}

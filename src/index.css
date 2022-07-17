@@ -5,12 +5,8 @@
 
 * {
   box-sizing: border-box;
-
-
-
   --form-text: normal 400 20px/1.5 var(var(--secondary-text-color));
-
-  --shadow: 0px 2px 11px 0px rgba(32, 37, 69, 0.35);
+  transition: background-color 150ms ease-out;
 }
 
 body {
@@ -25,6 +21,8 @@ body {
   --secondary-text-color: #8C8C8C;
   --inverted-text-color: #FFFFFF;
   --accent-overlay: #FF868E33;
+
+  --shadow: 0px 2px 11px 0px rgba(32, 37, 69, 0.35);
 
   --theme-icon: '☽';
 

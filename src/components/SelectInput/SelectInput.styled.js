@@ -17,6 +17,7 @@ export const Field = styled.p`
   background-color: var(--back-color);
   border-radius: 10px;
   border: none;
+  white-space: nowrap;
   cursor: pointer;
   :focus {
     border: solid 2px var(--faded-accent-color);
@@ -49,7 +50,7 @@ export const FieldList = styled.ul`
   position: absolute;
   top: 50px;
   left: 0px;
-  width: 100%;
+  /* width: 100%; */
   max-height: 69vh;
   margin: 0;
   padding: 20px;
@@ -64,6 +65,7 @@ export const FieldList = styled.ul`
   li {
     margin-bottom: 8px;
     font: var(--form-list-text);
+    white-space: nowrap;
     cursor: pointer;
     :hover {
       background-color: var(--back-color);

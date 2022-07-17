@@ -12,7 +12,7 @@ const GalleryItem = ({
       id={id}
       onClick={onClick}
       widthKoef={widthKoef}
-      hoverContent={hoverContent || 'click me'}
+      hoverContent={hoverContent || 'not specified'}
     >
       <div>
         <Img src={imageURL} alt="preview" />

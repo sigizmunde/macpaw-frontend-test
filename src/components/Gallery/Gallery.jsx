@@ -10,8 +10,8 @@ const Gallery = ({ items, handleClick }) => {
           id={id}
           imageURL={url}
           widthKoef={Math.round((width / height) * 3)}
-          onClick={() => handleClick(id)}
-          hoverContent={breeds[0].name}
+          onClick={() => handleClick(breeds[0]?.id || '')}
+          hoverContent={breeds[0]?.name}
         />
       ))}
     </GalleryList>

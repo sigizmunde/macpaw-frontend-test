@@ -1,11 +1,18 @@
-import { Btn, Panel, PanelBtn } from 'components/StyledBlocks/StyledBlocks';
+import { Btn, Panel } from 'components/StyledBlocks/StyledBlocks';
 import styled from 'styled-components';
 
 export const Pagination = styled.div`
+  position: absolute;
+  z-index: 12;
+  bottom: 20px;
+  width: calc(100% - 42px);
+  height: 80px;
   display: flex;
   justify-content: center;
   gap: 40px;
-  margin-top: 20px;
+  margin: 0;
+  padding: 20px;
+  background-color: var(--panel-back-color);
 `;
 
 export const PagBtn = styled(Btn)`
@@ -24,5 +31,5 @@ export const PagBtn = styled(Btn)`
 `;
 
 export const ContentPanel = styled(Panel)`
-  height: 90%;
+  height: 100%;
 `;
