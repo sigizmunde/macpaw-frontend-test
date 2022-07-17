@@ -1,0 +1,20 @@
+.darktheme {
+    box-sizing: border-box;
+
+    --back-color: #1D1D1D;
+    --panel-back-color: #2A2A2A;
+    --accent-color: #FF868E;
+    --accent-green-color: #97EAB9;
+    --accent-yellow-color: #FFD280;
+    --accent-blue-color: #B4B7FF;
+    --faded-accent-color: #FF868E33;
+    --main-text-color: #FFFFFF;
+    --secondary-text-color: #8C8C8C;
+    --inverted-text-color: #FFFFFF;
+
+    --theme-icon: '🌣';
+
+    --form-text: normal 400 20px/1.5 var(var(--secondary-text-color));
+
+    --shadow: 0px 2px 11px 0px rgba(32, 37, 69, 0.35);
+}
