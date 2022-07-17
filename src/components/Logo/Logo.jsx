@@ -4,7 +4,7 @@ import { ReactComponent as SvgLogo } from '../../images/logo.svg';
 const Logo = ({ onClick }) => {
   return (
     <>
-      <SvgLogo className={css.logo_svg} onClick={onClick} />
+      <SvgLogo className={css.logo_svg} onClick={() => onClick('start')} />
     </>
   );
 };

@@ -1,6 +1,12 @@
 import { useState } from 'react';
-import { PanelBtn, FadedBtn, Svg } from 'components/StyledBlocks/StyledBlocks';
-import { HeaderDiv, Label, Input } from './HeaderForm.styled';
+import { PanelBtn, Svg } from 'components/StyledBlocks/StyledBlocks';
+import {
+  HeaderDiv,
+  MenuBtn,
+  Label,
+  Input,
+  SearchBtn,
+} from './HeaderForm.styled';
 import Icons from 'images/icons/symbol-defs.svg';
 
 const HeaderForm = ({ onBreedSearch }) => {
@@ -17,6 +23,11 @@ const HeaderForm = ({ onBreedSearch }) => {
 
   return (
     <HeaderDiv>
+      <MenuBtn>
+        <Svg>
+          <use href={Icons + '#icon-menu'} />
+        </Svg>
+      </MenuBtn>
       <Label>
         <Input
           type="text"
@@ -24,11 +35,11 @@ const HeaderForm = ({ onBreedSearch }) => {
           value={breedSearch}
           onChange={onBreedInput}
         />
-        <FadedBtn type="button" onClick={onBreedClick}>
+        <SearchBtn type="button" onClick={onBreedClick}>
           <Svg>
             <use href={Icons + '#icon-search-20'} />
           </Svg>
-        </FadedBtn>
+        </SearchBtn>
       </Label>
       <PanelBtn type="button">
         <Svg>

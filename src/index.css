@@ -6,6 +6,14 @@
 * {
   box-sizing: border-box;
 
+
+
+  --form-text: normal 400 20px/1.5 var(var(--secondary-text-color));
+
+  --shadow: 0px 2px 11px 0px rgba(32, 37, 69, 0.35);
+}
+
+body {
   --back-color: #F8F8F7;
   --panel-back-color: #FFFFFF;
   --accent-color: #FF868E;
@@ -16,13 +24,10 @@
   --main-text-color: #1D1D1D;
   --secondary-text-color: #8C8C8C;
   --inverted-text-color: #FFFFFF;
+  --accent-overlay: #FF868E33;
 
-  --form-text: normal 400 20px/1.5 var(var(--secondary-text-color));
+  --theme-icon: '☽';
 
-  --shadow: 0px 2px 11px 0px rgba(32, 37, 69, 0.35);
-}
-
-body {
   margin: 0;
   padding: 0;
   font-family: 'Jost',

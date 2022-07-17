@@ -14,7 +14,7 @@ import {
 import Icons from 'images/icons/symbol-defs.svg';
 import SelectInput from 'components/SelectInput/SelectInput';
 import Gallery from 'components/Gallery/Gallery';
-import Pagination from './BreedsPanel.styled';
+import { ContentPanel, Pagination, PagBtn } from './BreedsPanel.styled';
 import Loader from 'components/Loader/Loader';
 
 const limitArray = [
@@ -37,6 +37,7 @@ const BreedsPanel = () => {
   const [breedId, setBreedId] = useState('');
   const [limit, setLimit] = useState('10');
   const [page, setPage] = useState(0);
+  const [imgCount, setImgCount] = useState(0);
   const [images, setImages] = useState([]);
   const [activeImageId, setActiveImageId] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -49,8 +50,13 @@ const BreedsPanel = () => {
     if (breedId !== '') {
       async function loadingImages() {
         setIsLoading(true);
-        const imageArray = await fetchImages({ breedId, limit, page });
-        setImages(imageArray);
+        const { data, itemsCount } = await fetchImages({
+          breedId,
+          limit,
+          page,
+        });
+        setImages(data);
+        setImgCount(itemsCount);
         setIsLoading(false);
       }
       loadingImages();
@@ -89,7 +95,7 @@ const BreedsPanel = () => {
 
   return (
     <PanelWrapper>
-      <Panel>
+      <ContentPanel>
         <FormWrapper>
           <BackBtn />
           <TextBtn type="button">Breeds</TextBtn>
@@ -124,21 +130,23 @@ const BreedsPanel = () => {
         )}
         <Pagination>
           {page > 0 && (
-            <PanelBtn type="button" onClick={() => setPage(page => page - 1)}>
+            <PagBtn type="button" onClick={() => setPage(page => page - 1)}>
               <Svg>
                 <use href={Icons + '#icon-back-20'} />
               </Svg>
-              prev
-            </PanelBtn>
+              <span>prev</span>
+            </PagBtn>
           )}
-          <PanelBtn type="button" onClick={() => setPage(page => page + 1)}>
-            next
-            <Svg180>
-              <use href={Icons + '#icon-back-20'} />
-            </Svg180>
-          </PanelBtn>
+          {page < Math.floor(imgCount / Number.parseInt(limit)) && (
+            <PagBtn type="button" onClick={() => setPage(page => page + 1)}>
+              <span>next</span>
+              <Svg180>
+                <use href={Icons + '#icon-back-20'} />
+              </Svg180>
+            </PagBtn>
+          )}
         </Pagination>
-      </Panel>
+      </ContentPanel>
     </PanelWrapper>
   );
 };

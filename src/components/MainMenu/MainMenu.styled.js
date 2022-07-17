@@ -63,4 +63,13 @@ export const MenuItem = styled.li`
     color: var(--inverted-text-color);
     background-color: var(--accent-color);
   }
+  ${MenuLink} {
+    ${props => props.active && `border: 4px solid var(--faded-accent-color);`}
+  }
+  ${MenuBtn} {
+    ${props =>
+      props.active &&
+      `color: var(--inverted-text-color);
+    background-color: var(--accent-color);`}
+  }
 `;

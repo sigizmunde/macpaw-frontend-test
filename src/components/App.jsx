@@ -1,5 +1,6 @@
 import { fetchDogImages } from 'api-service/api';
-import React, { useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
+import css from './App.module.css';
 import { Main, SectionWrapper } from './SectionWrapper/SectionWrapper';
 import Gallery from './Gallery/Gallery';
 import Logo from './Logo/Logo';
@@ -8,11 +9,16 @@ import StartImage from './StartImage/StartImage';
 import HeaderForm from './HeaderForm/HeaderForm';
 import BreedsPanel from './BreedsPanel/BreedsPanel';
 
+const modeContext = createContext('start');
+
+export const useModeContext = () => useContext(modeContext);
+
 export const App = () => {
   const [items, setItems] = useState([]);
   const [activeId, setActiveId] = useState('');
   const [query, setQuery] = useState('');
   const [mode, setMode] = useState('start');
+  const [darkTheme, setDarkTheme] = useState(false);
 
   const loadData = () => {
     fetchDogImages().then(data => setItems(data));
@@ -30,28 +36,32 @@ export const App = () => {
     setQuery(search);
   };
 
+  const toggleDarkTheme = () => setDarkTheme(dark => !dark);
+
   return (
-    <Main>
-      <SectionWrapper>
-        <Logo onClick={() => changeMode('start')} />
-        <ControlSection onClick={changeMode} />
-      </SectionWrapper>
-      <SectionWrapper>
-        {mode !== 'start' && <HeaderForm onBreedSearch={handleSearch} />}
-        {mode === 'start' && (
-          <StartImage />
-          // <>
-          //   React test task
-          //   <button type="button" onClick={loadData}>
-          //     Load
-          //   </button>
-          // </>
-        )}
-        {mode === 'breeds' && <BreedsPanel />}
-        {/* {items.length > 0 && (
+    <modeContext.Provider value={mode}>
+      <Main className={darkTheme && css.darktheme}>
+        <ControlSection
+          onClick={changeMode}
+          handleDarkTheme={toggleDarkTheme}
+        />
+        <SectionWrapper>
+          {mode !== 'start' && <HeaderForm onBreedSearch={handleSearch} />}
+          {mode === 'start' && (
+            <StartImage />
+            // <>
+            //   React test task
+            //   <button type="button" onClick={loadData}>
+            //     Load
+            //   </button>
+            // </>
+          )}
+          {mode === 'breeds' && <BreedsPanel />}
+          {/* {items.length > 0 && (
           <Gallery items={items} handleClick={handleClick} />
         )} */}
-      </SectionWrapper>
-    </Main>
+        </SectionWrapper>
+      </Main>
+    </modeContext.Provider>
   );
 };

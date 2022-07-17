@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const SectionWrapper = styled.div`
   width: 50%;
+  min-width: 512px;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;

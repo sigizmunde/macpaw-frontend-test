@@ -9,7 +9,7 @@ export const PanelWrapper = styled.div`
 export const Panel = styled.div`
   position: relative;
   width: 100%;
-  height: 90%;
+  height: 100%;
   padding: 20px;
   background-color: var(--panel-back-color);
   border-radius: 20px;
@@ -25,6 +25,9 @@ export const FormWrapper = styled.div`
 
 export const Btn = styled.button`
   display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  gap: 10px;
   justify-content: center;
   align-items: center;
   padding: auto 10px;
@@ -90,6 +93,7 @@ export const FadedBtn = styled(Btn)`
 `;
 
 export const TextBtn = styled(Btn)`
+  font-size: 100%;
   padding-left: 30px;
   padding-right: 30px;
   :focus {

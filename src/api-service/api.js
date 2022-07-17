@@ -22,5 +22,8 @@ export async function fetchImages({ breedId = '-1', limit, page }) {
       breedId !== '-1' ? 'breed_id=' + breedId : ''
     }&limit=${limit}&page=${page}`
   );
-  return rawData.data;
+  return {
+    data: rawData.data,
+    itemsCount: rawData.headers['pagination-count'],
+  };
 }

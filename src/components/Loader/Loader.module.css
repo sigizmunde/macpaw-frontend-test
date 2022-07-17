@@ -13,10 +13,13 @@
 
 .LoaderPic {
     position: absolute;
+
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1299;
+    width: 100px;
+    height: 100px;
     animation: 1.6s linear 0s infinite rotate_pic;
 }
 

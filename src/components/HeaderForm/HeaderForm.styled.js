@@ -1,3 +1,4 @@
+import { FadedBtn, PanelBtn } from 'components/StyledBlocks/StyledBlocks';
 import styled from 'styled-components';
 
 export const HeaderDiv = styled.div`
@@ -10,16 +11,33 @@ export const HeaderDiv = styled.div`
   padding: 10px 10px 0 10px;
 `;
 
+export const MenuBtn = styled(PanelBtn)`
+  @media (min-width: 1024px) {
+    display: none;
+  }
+`;
+
 export const Input = styled.input`
-  border: none;
   width: 100%;
   font: var(--form-text);
+  background-color: var(--panel-back-color);
+  border: none;
+  border-radius: 20px;
+  padding: 15px;
 `;
 
 export const Label = styled.label`
+  position: relative;
   display: flex;
   width: 100%;
-  padding: 10px;
+  padding: 0;
   background-color: var(--panel-back-color);
   border-radius: 20px;
+`;
+
+export const SearchBtn = styled(FadedBtn)`
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
 `;
