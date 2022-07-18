@@ -6,10 +6,10 @@ const API_BASE_URL = 'https://api.thedogapi.com/v1';
 axios.defaults.baseURL = API_BASE_URL;
 axios.defaults.headers['x-api-key'] = API_KEY;
 
-export async function fetchDogImages() {
-  const rawData = await axios.get(`/images/search?size=full`);
-  return rawData.data;
-}
+// export async function fetchDogImages() {
+//   const rawData = await axios.get(`/images/search?size=full`);
+//   return rawData.data;
+// }
 
 export async function fetchBreedList() {
   const rawData = await axios.get(`/breeds`);
