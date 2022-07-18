@@ -1,12 +1,12 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const MenuList = styled.ul`
+export const MenuList = styled.div`
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
   padding: 0;
   width: 100%;
-  list-style: none;
 `;
 
 export const MenuLink = styled.div`
@@ -48,7 +48,7 @@ export const MenuBtn = styled.button`
   border-radius: 10px;
 `;
 
-export const MenuItem = styled.li`
+export const MenuNavLink = styled(NavLink)`
   display: block;
   :hover ${MenuLink} {
     border: 4px solid rgba(255, 255, 255, 1);
@@ -63,13 +63,11 @@ export const MenuItem = styled.li`
     color: var(--inverted-text-color);
     background-color: var(--accent-color);
   }
-  ${MenuLink} {
-    ${props => props.active && `border: 4px solid var(--faded-accent-color);`}
+  &.active ${MenuLink} {
+    border: 4px solid var(--faded-accent-color);
   }
-  ${MenuBtn} {
-    ${props =>
-      props.active &&
-      `color: var(--inverted-text-color);
-    background-color: var(--accent-color);`}
+  &.active ${MenuBtn} {
+    color: var(--inverted-text-color);
+    background-color: var(--accent-color);
   }
 `;

@@ -1,15 +1,15 @@
 import { FadedBtn, Svg } from 'components/StyledBlocks/StyledBlocks';
-import { useModeContext } from 'components/App';
+import { createBrowserHistory } from 'history';
 import PropTypes from 'prop-types';
 import Icons from 'images/icons/symbol-defs.svg';
 
 const BackBtn = ({ destination }) => {
-  const { mode, setMode } = useModeContext();
+  let history = createBrowserHistory();
 
   return (
     <FadedBtn
       onClick={() => {
-        destination !== mode && setMode(destination);
+        history.back();
       }}
     >
       <Svg>

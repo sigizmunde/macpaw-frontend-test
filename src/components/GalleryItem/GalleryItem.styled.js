@@ -20,7 +20,7 @@ export const GalleryLi = styled.li`
   position: relative;
   overflow: hidden;
   :hover::before {
-    content: '!';
+    content: '';
     position: absolute;
     top: 0;
     left: 0;

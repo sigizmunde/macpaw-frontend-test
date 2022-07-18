@@ -14,6 +14,7 @@ import SelectInput from 'components/SelectInput/SelectInput';
 import Gallery from 'components/Gallery/Gallery';
 import { ContentPanel, Pagination, PagBtn } from './BreedsPanel.styled';
 import Loader from 'components/Loader/Loader';
+import { useNavigate } from 'react-router-dom';
 
 const limitArray = [
   { id: '5', value: 'limit: 5' },
@@ -30,7 +31,7 @@ function usePreviousValue(value) {
   return ref.current;
 }
 
-const BreedsPanel = ({ onImageClick }) => {
+const BreedsPanel = () => {
   const [breedArray, setBreedArray] = useState([]);
   const [breedId, setBreedId] = useState('');
   const [limit, setLimit] = useState('10');
@@ -86,8 +87,10 @@ const BreedsPanel = ({ onImageClick }) => {
     if (!prevSortZ && sortingZ) setSortingA(false);
   }, [sortingZ, prevSortZ]);
 
+  const navigate = useNavigate();
+
   const handleClick = imageBreedId => {
-    onImageClick(imageBreedId);
+    navigate(`${imageBreedId}`);
   };
 
   return (

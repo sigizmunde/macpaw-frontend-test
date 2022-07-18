@@ -11,16 +11,19 @@ import {
   SliderBtn,
   Subtitle,
 } from './BreedInfo.styled';
+import { Link, useParams } from 'react-router-dom';
 
 const { default: BackBtn } = require('components/BackBtn/BackBtn');
-const { ContentPanel } = require('components/BreedsPanel/BreedsPanel.styled');
+const { ContentPanel } = require('pages/BreedsPanel/BreedsPanel.styled');
 const {
   PanelWrapper,
   FormWrapper,
   TextBtn,
 } = require('components/StyledBlocks/StyledBlocks');
 
-const BreedInfo = ({ breedId }) => {
+const BreedInfo = () => {
+  const { breedId } = useParams();
+
   const [img, setImg] = useState({ url: '', name: '' });
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -50,7 +53,9 @@ const BreedInfo = ({ breedId }) => {
       <ContentPanel>
         <FormWrapper>
           <BackBtn destination="breeds" />
-          <TextBtn type="button">Breeds</TextBtn>
+          <Link to="/breeds/">
+            <TextBtn type="button">Breeds</TextBtn>
+          </Link>
           <TextBtn type="button">{breedId}</TextBtn>
           <div style={{ marginLeft: 'auto' }}></div>
         </FormWrapper>

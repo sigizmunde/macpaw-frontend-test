@@ -1,35 +1,26 @@
-import { useModeContext } from 'components/App';
-import { MenuBtn, MenuItem, MenuLink, MenuList } from './MainMenu.styled';
+import { MenuBtn, MenuNavLink, MenuLink, MenuList } from './MainMenu.styled';
 
 const MainMenu = () => {
-  const { mode, setMode } = useModeContext();
-
   return (
     <MenuList className="main_menu">
-      <MenuItem active={mode === 'voting'}>
-        <MenuLink color="blue" onClick={() => setMode('voting')}>
+      <MenuNavLink to="/voting">
+        <MenuLink color="blue">
           <img src={require('../../images/vote-table.png')} alt="voting" />
         </MenuLink>
-        <MenuBtn type="button" onClick={() => setMode('voting')}>
-          Voting
-        </MenuBtn>
-      </MenuItem>
-      <MenuItem active={mode === 'breeds'}>
-        <MenuLink color="green" onClick={() => setMode('breeds')}>
+        <MenuBtn type="button">Voting</MenuBtn>
+      </MenuNavLink>
+      <MenuNavLink to="/breeds">
+        <MenuLink color="green">
           <img src={require('../../images/pet-breeds.png')} alt="breeds" />
         </MenuLink>
-        <MenuBtn type="button" onClick={() => setMode('breeds')}>
-          Breeds
-        </MenuBtn>
-      </MenuItem>
-      <MenuItem active={mode === 'gallery'}>
-        <MenuLink color="yellow" onClick={() => setMode('gallery')}>
+        <MenuBtn type="button">Breeds</MenuBtn>
+      </MenuNavLink>
+      <MenuNavLink to="/gallery">
+        <MenuLink color="yellow">
           <img src={require('../../images/images-search.png')} alt="gallery" />
         </MenuLink>
-        <MenuBtn type="button" onClick={() => setMode('gallery')}>
-          Gallery
-        </MenuBtn>
-      </MenuItem>
+        <MenuBtn type="button">Gallery</MenuBtn>
+      </MenuNavLink>
     </MenuList>
   );
 };
