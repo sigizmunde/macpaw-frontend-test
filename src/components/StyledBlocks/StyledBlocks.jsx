@@ -105,6 +105,22 @@ export const TextBtn = styled(Btn)`
   }
 `;
 
+export const FadedTextBtn = styled(TextBtn)`
+  color: var(--accent-color);
+  background-color: var(--faded-accent-color);
+  ${prop =>
+    !prop.disabled &&
+    `
+  :hover {
+    color: var(--inverted-text-color);
+    background-color: var(--accent-color);
+  }
+  :active {
+    color: var(--accent-color);
+    background-color: var(--panel-back-color);
+  }`}
+`;
+
 export const Svg = styled.svg`
   display: inline-block;
   width: 1em;

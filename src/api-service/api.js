@@ -18,8 +18,8 @@ export async function fetchBreedList() {
 
 export async function fetchImages({
   breedId = '-1',
-  limit,
-  page,
+  limit = 10,
+  page = 0,
   order = 'random',
   type = 'all',
 }) {
@@ -33,9 +33,58 @@ export async function fetchImages({
       : ''
   }`;
   console.log(queryString);
-  const rawData = await axios.get(queryString);
-  return {
-    data: rawData.data,
-    itemsCount: rawData.headers['pagination-count'],
-  };
+  try {
+    const rawData = await axios.get(queryString);
+    return {
+      data: rawData.data,
+      itemsCount: rawData.headers['pagination-count'],
+    };
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export async function postImageVote({ id, sub_id = '', value = 1 }) {
+  const data = { image_id: id, value };
+  if (sub_id) data.sub_id = sub_id;
+  try {
+    const status = await axios.post('/votes', data);
+    console.log(status);
+    return status;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export async function postImageFav({ id, sub_id = '' }) {
+  const data = { image_id: id };
+  if (sub_id) data.sub_id = sub_id;
+  try {
+    const status = await axios.post('/favourites', data);
+    console.log(status);
+    return status;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export async function deleteFav({ id }) {
+  try {
+    const status = await axios.delete(`/favourites/${id}`);
+    console.log(status);
+    return status;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export async function fetchFavs() {
+  try {
+    const rawData = await axios.get('/favourites', {});
+    return {
+      data: rawData.data,
+    };
+  } catch (err) {
+    console.error(err);
+  }
 }

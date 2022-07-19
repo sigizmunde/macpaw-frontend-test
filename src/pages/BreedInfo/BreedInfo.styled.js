@@ -35,7 +35,8 @@ export const OverlayControlPanel = styled.div`
   background-color: var(--panel-back-color);
   border-radius: 20px;
   padding: 10px;
-  /* border: solid 5px var(--panel-back-color); */
+  border: solid inset 5px var(--panel-back-color);
+  overflow: hidden;
 
   position: absolute;
   z-index: 1;

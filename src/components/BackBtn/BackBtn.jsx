@@ -1,9 +1,8 @@
 import { FadedBtn, Svg } from 'components/StyledBlocks/StyledBlocks';
 import { createBrowserHistory } from 'history';
-import PropTypes from 'prop-types';
 import Icons from 'images/icons/symbol-defs.svg';
 
-const BackBtn = ({ destination }) => {
+const BackBtn = () => {
   let history = createBrowserHistory();
 
   return (
@@ -18,7 +17,5 @@ const BackBtn = ({ destination }) => {
     </FadedBtn>
   );
 };
-
-BackBtn.propTypes = { destination: PropTypes.string.isRequired };
 
 export default BackBtn;

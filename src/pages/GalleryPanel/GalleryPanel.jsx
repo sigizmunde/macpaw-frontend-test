@@ -105,8 +105,10 @@ const GalleryPanel = () => {
     <PanelWrapper>
       <ContentPanel>
         <FormWrapper>
-          <BackBtn destination="start" />
-          <TextBtn type="button">Gallery</TextBtn>
+          <BackBtn />
+          <TextBtn type="button" disabled>
+            Gallery
+          </TextBtn>
           <div style={{ marginLeft: 'auto' }} />
           <TextBtn type="button">
             Upload{' '}

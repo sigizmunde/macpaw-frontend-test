@@ -19,6 +19,7 @@ const {
   PanelWrapper,
   FormWrapper,
   TextBtn,
+  FadedTextBtn,
 } = require('components/StyledBlocks/StyledBlocks');
 
 const BreedInfo = () => {
@@ -52,11 +53,13 @@ const BreedInfo = () => {
     <PanelWrapper>
       <ContentPanel>
         <FormWrapper>
-          <BackBtn destination="breeds" />
+          <BackBtn />
           <Link to="/breeds/">
-            <TextBtn type="button">Breeds</TextBtn>
+            <FadedTextBtn type="button">Breeds</FadedTextBtn>
           </Link>
-          <TextBtn type="button">{breedId}</TextBtn>
+          <TextBtn type="button" disabled>
+            {breedId}
+          </TextBtn>
           <div style={{ marginLeft: 'auto' }}></div>
         </FormWrapper>
         {isLoading && <Loader />}

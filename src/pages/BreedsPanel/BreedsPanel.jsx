@@ -97,8 +97,10 @@ const BreedsPanel = () => {
     <PanelWrapper>
       <ContentPanel>
         <FormWrapper>
-          <BackBtn destination="start" />
-          <TextBtn type="button">Breeds</TextBtn>
+          <BackBtn />
+          <TextBtn type="button" disabled>
+            Breeds
+          </TextBtn>
           <SelectInput
             items={breedArray}
             placeholder="select a breed"
