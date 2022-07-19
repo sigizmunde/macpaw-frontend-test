@@ -40,6 +40,9 @@ export const Btn = styled.button`
   letter-spacing: 2px;
   color: var(--inverted-text-color);
   background-color: var(--accent-color);
+  ${prop =>
+    !prop.disabled &&
+    `
   :hover {
     color: var(--accent-color);
     background-color: var(--faded-accent-color);
@@ -51,7 +54,7 @@ export const Btn = styled.button`
   :focus {
     padding: auto 8px;
     border: solid 2px var(--faded-accent-color);
-  }
+  }`}
 `;
 
 export const PanelBtn = styled(Btn)`
