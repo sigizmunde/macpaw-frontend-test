@@ -14,6 +14,8 @@ const Gallery = ({
           key={id}
           id={id}
           imageURL={url}
+          width={width}
+          height={height}
           onClick={() => handleClick(breeds[0]?.id || '')}
           hoverContent={hoverContent || breeds[0]?.name || 'not specified'}
           hoverCentered={hoverCentered}

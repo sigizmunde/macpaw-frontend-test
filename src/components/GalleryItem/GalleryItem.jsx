@@ -3,6 +3,8 @@ import { Img, GalleryLi } from './GalleryItem.styled';
 const GalleryItem = ({
   id,
   imageURL,
+  width,
+  height,
   onClick,
   hoverContent = '',
   hoverCentered = true,
@@ -11,6 +13,7 @@ const GalleryItem = ({
     <GalleryLi
       id={id}
       onClick={onClick}
+      widthKoef={Number.parseInt(width) / Number.parseInt(height)}
       hoverContent={hoverContent}
       hoverCentered={hoverCentered}
     >

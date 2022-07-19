@@ -4,7 +4,9 @@ export const GalleryList = styled.ul`
   position: absolute;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: stretch;
+  align-content: stretch;
+  /* justify-content: flex-start; */
   gap: 10px;
   padding: 10px 0;
   margin: 0;
