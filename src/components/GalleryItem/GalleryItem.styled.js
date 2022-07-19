@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const GalleryLi = styled.li`
   display: block;
-  flex-grow: ${p => p.widthKoef};
   width: auto;
   height: 150px;
   overflow: hidden;
@@ -33,9 +32,11 @@ export const GalleryLi = styled.li`
     content: '${prop => prop.hoverContent}';
     position: absolute;
     z-index: 2;
-    bottom: 10px;
     left: 50%;
-    transform: translateX(-50%);
+    ${prop =>
+      prop.hoverCentered
+        ? 'bottom: 50%; transform: translate(-50%, 50%);'
+        : 'bottom: 10px; transform: translateX(-50%);'}
     width: calc(100% - 20px);
     height: 34px;
     border-radius: 10px;

@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import css from './App.module.css';
 import { Main, SectionWrapper } from './SectionWrapper/SectionWrapper';
+import NotFound from './NotFound/NotFound';
 import ControlSection from './ControlSection/ControlSection';
 import StartImage from './StartImage/StartImage';
 import HeaderForm from './HeaderForm/HeaderForm';
 import BreedsPanel from '../pages/BreedsPanel/BreedsPanel';
 import BreedInfo from '../pages/BreedInfo/BreedInfo';
-import NotFound from './NotFound/NotFound';
+
+import GalleryPanel from 'pages/GalleryPanel/GalleryPanel';
+import VotingPanel from 'pages/VotingPanel/VotingPanel';
 
 export const App = () => {
   const [query, setQuery] = useState('');
@@ -40,6 +43,24 @@ export const App = () => {
               <>
                 <HeaderForm onBreedSearch={handleSearch} />
                 <BreedInfo />
+              </>
+            }
+          />
+          <Route
+            path="/gallery"
+            element={
+              <>
+                <HeaderForm onBreedSearch={handleSearch} />
+                <GalleryPanel />
+              </>
+            }
+          />
+          <Route
+            path="/voting"
+            element={
+              <>
+                <HeaderForm onBreedSearch={handleSearch} />
+                <VotingPanel />
               </>
             }
           />

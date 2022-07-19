@@ -3,16 +3,16 @@ import { Img, GalleryLi } from './GalleryItem.styled';
 const GalleryItem = ({
   id,
   imageURL,
-  widthKoef,
   onClick,
   hoverContent = '',
+  hoverCentered = true,
 }) => {
   return (
     <GalleryLi
       id={id}
       onClick={onClick}
-      widthKoef={widthKoef}
-      hoverContent={hoverContent || 'not specified'}
+      hoverContent={hoverContent}
+      hoverCentered={hoverCentered}
     >
       <div>
         <Img src={imageURL} alt="preview" />

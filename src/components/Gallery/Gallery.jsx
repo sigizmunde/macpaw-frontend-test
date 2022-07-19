@@ -1,7 +1,12 @@
 import GalleryItem from 'components/GalleryItem/GalleryItem';
 import { GalleryList } from './Gallery.styled';
 
-const Gallery = ({ items, handleClick }) => {
+const Gallery = ({
+  items,
+  handleClick,
+  hoverContent = null,
+  hoverCentered = false,
+}) => {
   return (
     <GalleryList>
       {items.map(({ id, url, width, height, breeds }) => (
@@ -9,9 +14,9 @@ const Gallery = ({ items, handleClick }) => {
           key={id}
           id={id}
           imageURL={url}
-          widthKoef={Math.round((width / height) * 3)}
           onClick={() => handleClick(breeds[0]?.id || '')}
-          hoverContent={breeds[0]?.name}
+          hoverContent={hoverContent || breeds[0]?.name || 'not specified'}
+          hoverCentered={hoverCentered}
         />
       ))}
     </GalleryList>

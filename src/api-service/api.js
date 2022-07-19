@@ -16,12 +16,24 @@ export async function fetchBreedList() {
   return rawData.data;
 }
 
-export async function fetchImages({ breedId = '-1', limit, page }) {
-  const rawData = await axios.get(
-    `/images/search?${
-      breedId !== '-1' ? 'breed_id=' + breedId : ''
-    }&limit=${limit}&page=${page}`
-  );
+export async function fetchImages({
+  breedId = '-1',
+  limit,
+  page,
+  order = 'random',
+  type = 'all',
+}) {
+  const queryString = `/images/search?${
+    breedId !== '-1' ? 'breed_id=' + breedId : ''
+  }&limit=${limit}&page=${page}${order !== 'random' ? '&order=' + order : ''}${
+    type !== 'all'
+      ? type === 'static'
+        ? '&mime_types=jpg,png'
+        : '&mime_types=gif'
+      : ''
+  }`;
+  console.log(queryString);
+  const rawData = await axios.get(queryString);
   return {
     data: rawData.data,
     itemsCount: rawData.headers['pagination-count'],

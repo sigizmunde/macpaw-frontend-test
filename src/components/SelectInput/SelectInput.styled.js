@@ -28,7 +28,7 @@ export const Field = styled.p`
     justify-content: center;
     content: url(${dropdownIcon});
     position: absolute;
-    z-index: 99;
+    z-index: 1;
     right: 5px;
     top: 50%;
     transform: translateY(-50%);
