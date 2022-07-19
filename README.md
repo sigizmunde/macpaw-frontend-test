@@ -4,6 +4,6 @@ Created on React
 
 ## Features
 
-1. Feature
+1. Custom masonry layout on flex-box
 2. Feature 2
 3. Feature 3

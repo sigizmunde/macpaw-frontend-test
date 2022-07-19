@@ -1,5 +1,5 @@
 import GalleryItem from 'components/GalleryItem/GalleryItem';
-import { GalleryList } from './Gallery.styled';
+import { GalleryList, TailPlaceholder } from './Gallery.styled';
 
 const Gallery = ({
   items,
@@ -14,11 +14,14 @@ const Gallery = ({
           key={id}
           id={id}
           imageURL={url}
+          width={width}
+          height={height}
           onClick={() => handleClick(breeds[0]?.id || '')}
           hoverContent={hoverContent || breeds[0]?.name || 'not specified'}
           hoverCentered={hoverCentered}
         />
       ))}
+      <TailPlaceholder />
     </GalleryList>
   );
 };

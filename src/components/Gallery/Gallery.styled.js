@@ -4,7 +4,9 @@ export const GalleryList = styled.ul`
   position: absolute;
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: stretch;
+  align-content: stretch;
+  /* justify-content: flex-start; */
   gap: 10px;
   padding: 10px 0;
   margin: 0;
@@ -22,4 +24,10 @@ export const GalleryList = styled.ul`
     background-color: var(--faded-accent-color);
     outline: none;
   }
+`;
+
+export const TailPlaceholder = styled.div`
+  width: auto;
+  flex-grow: 100;
+  margin-right: auto;
 `;
