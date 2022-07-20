@@ -166,16 +166,14 @@ const GalleryPanel = () => {
           </PanelBtn>
         </SearchImagesFormWrapper>
         {isLoading && <Loader />}
-        <div style={{ position: 'relative', height: '80%' }}>
-          {images.length > 0 && (
-            <Gallery
-              items={images}
-              handleClick={handleClickGallery}
-              hoverContent={`url(${require('images/icons/fav-30.png')})`}
-              hoverCentered={true}
-            />
-          )}
-        </div>
+        {images.length > 0 && (
+          <Gallery
+            items={images}
+            handleClick={handleClickGallery}
+            hoverContent={`url(${require('images/icons/fav-30.png')})`}
+            hoverCentered={true}
+          />
+        )}
         <Pagination>
           {page > 0 && (
             <PagBtn

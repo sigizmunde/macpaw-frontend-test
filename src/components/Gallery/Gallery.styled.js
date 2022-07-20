@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const GalleryList = styled.ul`
-  position: absolute;
   display: flex;
   flex-wrap: wrap;
   justify-content: stretch;
@@ -11,8 +10,8 @@ export const GalleryList = styled.ul`
   padding: 10px 0;
   margin: 0;
   list-style: none;
-  width: calc(100% - 32px);
-  height: calc(100% - 160px);
+  width: 100%;
+  height: calc(100% - 80px);
   overflow: auto;
   ::-webkit-scrollbar {
     width: 0.3em;

@@ -4,6 +4,7 @@ export const PanelWrapper = styled.div`
   width: 100%;
   height: 100%;
   padding: 10px;
+  overflow: auto;
 `;
 
 export const Panel = styled.div`
