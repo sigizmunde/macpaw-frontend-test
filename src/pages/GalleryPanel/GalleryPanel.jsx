@@ -170,7 +170,7 @@ const GalleryPanel = () => {
           <Gallery
             items={images}
             handleClick={handleClickGallery}
-            hoverContent={`url(${require('images/icons/fav-30.png')})`}
+            hoverContent={`url(${require('images/icons/fav-30.png')});`}
             hoverCentered={true}
           />
         )}

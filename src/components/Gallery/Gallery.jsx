@@ -17,7 +17,9 @@ const Gallery = ({
           width={width}
           height={height}
           onClick={() => handleClick(breeds[0]?.id || '')}
-          hoverContent={hoverContent || breeds[0]?.name || 'not specified'}
+          hoverContent={
+            hoverContent || `'${breeds[0]?.name}'` || 'not specified'
+          }
           hoverCentered={hoverCentered}
         />
       ))}

@@ -25,16 +25,17 @@ export const GalleryLi = styled.li`
       background-color: var(--accent-overlay);
     }
     :hover::after {
-      content: '${prop => prop.hoverContent}';
+      content: ${prop => prop.hoverContent};
       position: absolute;
       z-index: 2;
       left: 50%;
       ${prop =>
         prop.hoverCentered
-          ? 'bottom: 50%; transform: translate(-50%, 50%);'
-          : 'bottom: 10px; transform: translateX(-50%);'}
-      width: calc(100% - 20px);
+          ? 'bottom: 50%; transform: translate(-50%, 50%)'
+          : 'bottom: 10px; transform: translateX(-50%)'};
+      width: ${prop => (prop.hoverCentered ? 'auto' : 'calc(100% - 30px)')};
       height: 34px;
+      padding: 5px 5px 0;
       border-radius: 10px;
 
       display: flex;
