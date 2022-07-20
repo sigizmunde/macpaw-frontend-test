@@ -12,7 +12,10 @@ import {
   FavControlBtn,
   ImageContainer,
   LikeControlBtn,
+  LogItem,
+  LogList,
   OverlayControlPanel,
+  TimeStamp,
   VotingWrapper,
 } from './VotingPanel.styled';
 import Icons from 'images/icons/symbol-defs.svg';
@@ -23,6 +26,7 @@ import {
   deleteFav,
   fetchFavs,
 } from 'api-service/api';
+import Loader from 'components/Loader/Loader';
 
 const VotingPanel = () => {
   const [image, setImage] = useState({
@@ -30,20 +34,38 @@ const VotingPanel = () => {
     url: '',
     breeds: [{ name: '' }],
   });
+  const [isLoading, setIsLoading] = useState(false);
   const [fav, setFav] = useState('');
   const [favArr, setFavArr] = useState([]);
+  const [log, setLog] = useState(
+    JSON.parse(localStorage.getItem('logDog')) || []
+  );
 
   const getRandomImage = () => {
+    setIsLoading(true);
     fetchImages({ limit: 1 })
       .then(response => {
         setImage(response.data[0]);
       })
-      .catch(err => console.error(err));
+      .catch(err => console.error(err))
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {
     getRandomImage();
   }, []);
+
+  useEffect(() => {
+    console.log(log);
+    localStorage.setItem('logDog', JSON.stringify(log));
+  }, [log]);
+
+  const createLogItem = ({ eventType, imageId }) => {
+    const dateTime = new Date();
+    setLog(log => [{ date: dateTime, id: imageId, event: eventType }, ...log]);
+  };
 
   useEffect(() => {
     fetchFavs().then(response => {
@@ -73,6 +95,9 @@ const VotingPanel = () => {
           { id: response.data.id, imageId: image.id },
         ]);
       })
+      .then(() => {
+        createLogItem({ imageId: image.id, eventType: 'fav' });
+      })
       .catch(err => console.error(err));
   };
 
@@ -85,6 +110,9 @@ const VotingPanel = () => {
           });
         }
       })
+      .then(() => {
+        createLogItem({ imageId: image.id, eventType: 'unfav' });
+      })
       .catch(err => console.error(err));
   };
 
@@ -94,12 +122,20 @@ const VotingPanel = () => {
   };
 
   const handleVote = value => {
-    postImageVote({ id: image.id, value: value }).then(response => {
-      if (response && response.data.message === 'SUCCESS') {
-        console.log('successfuly voted ', value);
-      }
-      getRandomImage();
-    });
+    postImageVote({ id: image.id, value: value })
+      .then(response => {
+        if (response && response.data.message === 'SUCCESS') {
+          console.log('successfuly voted ', value);
+        }
+        getRandomImage();
+      })
+      .then(() => {
+        createLogItem({
+          imageId: image.id,
+          eventType: value ? 'vote-up' : 'vote-down',
+        });
+      })
+      .catch(err => console.error(err));
   };
 
   return (
@@ -112,9 +148,14 @@ const VotingPanel = () => {
           </TextBtn>
           <div style={{ marginLeft: 'auto' }}></div>
         </FormWrapper>
+
         <VotingWrapper>
           <ImageContainer>
-            <img src={image.url || ''} alt={image?.breeds[0]?.name || ''} />{' '}
+            {isLoading && <Loader />}
+            <img
+              src={image.url || ''}
+              alt={image?.breeds[0]?.name || ''}
+            />{' '}
           </ImageContainer>
           <OverlayControlPanel>
             <LikeControlBtn onClick={() => handleVote(1)}>
@@ -138,6 +179,50 @@ const VotingPanel = () => {
             </DislikeControlBtn>
           </OverlayControlPanel>
         </VotingWrapper>
+
+        <LogList>
+          {log.length > 0 &&
+            log.map(({ date, id, event }) => {
+              let messageString;
+              let iconHref = null;
+              switch (event) {
+                case 'fav':
+                  messageString = 'was added to Favourites';
+                  iconHref = Icons + '#icon-fav-color-20';
+                  break;
+                case 'unfav':
+                  messageString = 'was removed from Favourites';
+                  break;
+                case 'vote-up':
+                  messageString = 'was added to Likes';
+                  iconHref = Icons + '#icon-like-color-20';
+                  break;
+                case 'vote-down':
+                  messageString = 'was added to Dislikes';
+                  iconHref = Icons + '#icon-dislike-color-20';
+                  break;
+                default:
+                  break;
+              }
+              return (
+                <LogItem key={date}>
+                  <TimeStamp>
+                    {new Date(date).getHours()}:{new Date(date).getMinutes()}
+                  </TimeStamp>
+                  <div>
+                    Image ID: <span>{id}</span> {messageString}
+                  </div>
+                  <div>
+                    {iconHref && (
+                      <Svg>
+                        <use href={iconHref} />
+                      </Svg>
+                    )}
+                  </div>
+                </LogItem>
+              );
+            })}
+        </LogList>
       </ContentPanel>
     </PanelWrapper>
   );
