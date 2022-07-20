@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 import css from './App.module.css';
 import { Main, SectionWrapper } from './SectionWrapper/SectionWrapper';
 import NotFound from './NotFound/NotFound';
@@ -27,44 +27,22 @@ export const App = () => {
       <ControlSection handleDarkTheme={toggleDarkTheme} />
       <SectionWrapper>
         <Routes>
-          <Route path="/" element={<StartImage />} />
+          <Route index element={<StartImage />} />
           <Route
-            path="/breeds"
+            path="/"
             element={
               <>
                 <HeaderForm onBreedSearch={handleSearch} />
-                <BreedsPanel />
+                <Outlet />
               </>
             }
-          />
-          <Route
-            path="/breeds/:breedId"
-            element={
-              <>
-                <HeaderForm onBreedSearch={handleSearch} />
-                <BreedInfo />
-              </>
-            }
-          />
-          <Route
-            path="/gallery"
-            element={
-              <>
-                <HeaderForm onBreedSearch={handleSearch} />
-                <GalleryPanel />
-              </>
-            }
-          />
-          <Route
-            path="/voting"
-            element={
-              <>
-                <HeaderForm onBreedSearch={handleSearch} />
-                <VotingPanel />
-              </>
-            }
-          />
-          <Route path="*" element={<NotFound />} />
+          >
+            <Route path="breeds" element={<BreedsPanel />} />
+            <Route path="breeds/:breedId" element={<BreedInfo />} />
+            <Route path="gallery" element={<GalleryPanel />} />
+            <Route path="voting" element={<VotingPanel />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
         </Routes>
         {/* {mode !== 'start' && <HeaderForm onBreedSearch={handleSearch} />}
           {mode === 'start' && (
