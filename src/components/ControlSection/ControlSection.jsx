@@ -14,9 +14,7 @@ const ControlSection = ({ handleDarkTheme }) => {
   return (
     <ControlWrapper>
       <DarkLightButton onClick={handleDarkTheme} />
-      <Link to="/">
-        <Logo />
-      </Link>
+      <Logo />
       <Section>
         <H1>Hi intern!</H1>
         <Description>Welcome to MI 2022 Front-end test</Description>
