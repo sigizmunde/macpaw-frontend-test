@@ -13,10 +13,6 @@ const ActiveBtn = styled(Btn)`
   color: var(--accent-color);
   background-color: var(--back-color);
   border: solid 2px var(--faded-accent-color);
-  ${({ children }) => children} {
-    color: inherit;
-    fill: var(--accent-color);
-  }
 `;
 
 const ChkBtn = ({ checked = false, setChecked, children }) => {
