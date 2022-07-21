@@ -20,7 +20,7 @@ export const SearchImagesFormWrapper = styled.div`
   padding: 10px;
   background-color: var(--back-color);
   border-radius: 20px;
-  div {
+  & > div {
     flex-grow: 1;
     width: 40%;
     ${Field} {
