@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { fetchBreedList, fetchImages } from 'api-service/api';
 import BackBtn from 'components/BackBtn/BackBtn';
 import ChkBtn from 'components/ChkBtn/ChkBtn';
@@ -23,26 +23,19 @@ const limitArray = [
   { id: '20', value: 'limit: 20' },
 ];
 
-function usePreviousValue(value) {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
-}
-
 const BreedsPanel = () => {
   const [breedArray, setBreedArray] = useState([]);
   const [breedId, setBreedId] = useState('');
   const [limit, setLimit] = useState('10');
   const [page, setPage] = useState(0);
+  const [sorting, setSorting] = useState('RAND');
   const [imgCount, setImgCount] = useState(0);
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setPage(0);
-  }, [breedId, limit]);
+  }, [breedId, sorting, limit]);
 
   useEffect(() => {
     if (breedId !== '') {
@@ -50,6 +43,7 @@ const BreedsPanel = () => {
         setIsLoading(true);
         const { data, itemsCount } = await fetchImages({
           breedId,
+          order: sorting,
           limit,
           page,
         });
@@ -59,7 +53,7 @@ const BreedsPanel = () => {
       }
       loadingImages();
     }
-  }, [breedId, limit, page]);
+  }, [breedId, sorting, limit, page]);
 
   async function getBreeds() {
     const data = await fetchBreedList();
@@ -71,21 +65,13 @@ const BreedsPanel = () => {
     getBreeds();
   }, []);
 
-  const [sortingA, setSortingA] = useState(false);
-  const [sortingZ, setSortingZ] = useState(false);
+  const toggleSortingAsc = () => {
+    setSorting(sorting => (sorting !== 'ASC' ? 'ASC' : 'RAND'));
+  };
 
-  const prevSortA = usePreviousValue(sortingA);
-  const prevSortZ = usePreviousValue(sortingZ);
-
-  useEffect(() => {
-    // console.log('prevA', prevSortA, 'A', sortingA);
-    if (!prevSortA && sortingA) setSortingZ(false);
-  }, [sortingA, prevSortA]);
-
-  useEffect(() => {
-    // console.log('prevZ', prevSortZ, 'Z', sortingZ);
-    if (!prevSortZ && sortingZ) setSortingA(false);
-  }, [sortingZ, prevSortZ]);
+  const toggleSortingDesc = () => {
+    setSorting(sorting => (sorting !== 'DESC' ? 'DESC' : 'RAND'));
+  };
 
   const navigate = useNavigate();
 
@@ -115,12 +101,12 @@ const BreedsPanel = () => {
             width="101px"
             onPick={setLimit}
           />
-          <ChkBtn checked={sortingA} setChecked={setSortingA}>
+          <ChkBtn checked={sorting === 'ASC'} setChecked={toggleSortingAsc}>
             <Svg>
               <use href={Icons + '#icon-sort-20'} />
             </Svg>
           </ChkBtn>
-          <ChkBtn checked={sortingZ} setChecked={setSortingZ}>
+          <ChkBtn checked={sorting === 'DESC'} setChecked={toggleSortingDesc}>
             <Svg>
               <use href={Icons + '#icon-sort-revert-20'} />
             </Svg>
@@ -130,24 +116,38 @@ const BreedsPanel = () => {
         {images.length > 0 && (
           <Gallery items={images} handleClick={handleClick} />
         )}
-        <Pagination>
-          {page > 0 && (
-            <PagBtn type="button" onClick={() => setPage(page => page - 1)}>
-              <Svg>
-                <use href={Icons + '#icon-back-20'} />
-              </Svg>
-              <span>prev</span>
-            </PagBtn>
-          )}
-          {page < Math.floor(imgCount / Number.parseInt(limit)) && (
-            <PagBtn type="button" onClick={() => setPage(page => page + 1)}>
-              <span>next</span>
-              <Svg180>
-                <use href={Icons + '#icon-back-20'} />
-              </Svg180>
-            </PagBtn>
-          )}
-        </Pagination>
+        {sorting !== 'RAND' && (
+          <Pagination>
+            {page > 0 && (
+              <PagBtn type="button" onClick={() => setPage(page => page - 1)}>
+                <Svg>
+                  <use href={Icons + '#icon-back-20'} />
+                </Svg>
+                <span>prev</span>
+              </PagBtn>
+            )}
+            {page < Math.floor(imgCount / Number.parseInt(limit)) && (
+              <PagBtn type="button" onClick={() => setPage(page => page + 1)}>
+                <span>next</span>
+                <Svg180>
+                  <use href={Icons + '#icon-back-20'} />
+                </Svg180>
+              </PagBtn>
+            )}
+          </Pagination>
+        )}
+        {sorting === 'RAND' && (
+          <Pagination>
+            {imgCount > Number.parseInt(limit) && (
+              <PagBtn type="button" onClick={() => setPage(page => page + 1)}>
+                <span>Load more random pics</span>
+                <Svg180>
+                  <use href={Icons + '#icon-back-20'} />
+                </Svg180>
+              </PagBtn>
+            )}
+          </Pagination>
+        )}
       </ContentPanel>
     </PanelWrapper>
   );
