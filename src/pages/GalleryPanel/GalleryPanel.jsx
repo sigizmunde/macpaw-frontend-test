@@ -19,6 +19,7 @@ import {
   PagBtn,
   Pagination,
 } from 'pages/BreedsPanel/BreedsPanel.styled';
+import { Link } from 'react-router-dom';
 
 const limitArray = [
   { id: '5', value: 'limit: 5' },
@@ -110,12 +111,14 @@ const GalleryPanel = () => {
             Gallery
           </TextBtn>
           <div style={{ marginLeft: 'auto' }} />
-          <TextBtn type="button">
-            Upload{' '}
-            <Svg>
-              <use href={Icons + '#icon-upload-20'} />
-            </Svg>
-          </TextBtn>
+          <Link to="/upload/">
+            <TextBtn type="button">
+              <Svg>
+                <use href={Icons + '#icon-upload-16'} />
+              </Svg>
+              Upload
+            </TextBtn>
+          </Link>
         </FormWrapper>
         <SearchImagesFormWrapper>
           <div>
@@ -124,7 +127,7 @@ const GalleryPanel = () => {
               items={orderArray}
               placeholder=" "
               initialIndex={0}
-              width="100%"
+              width={'100%'}
               onPick={setOrder}
             />
           </div>
@@ -134,7 +137,7 @@ const GalleryPanel = () => {
               items={typeArray}
               placeholder=" "
               initialIndex={0}
-              width="100%"
+              width={'100%'}
               onPick={setType}
             />
           </div>

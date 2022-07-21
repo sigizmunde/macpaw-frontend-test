@@ -88,3 +88,23 @@ export async function fetchFavs() {
     console.error(err);
   }
 }
+
+export async function postImageFile(file) {
+  const data = { file: file };
+  try {
+    const rawData = await axios.post('/images/upload', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return {
+      data: rawData.data,
+    };
+  } catch (err) {
+    if (err.response.status === 400) {
+      // console.log(err.message);
+      return err.response.data.message;
+    }
+    console.error(err);
+  }
+}

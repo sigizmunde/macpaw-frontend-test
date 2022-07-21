@@ -8,9 +8,9 @@ import StartImage from './StartImage/StartImage';
 import HeaderForm from './HeaderForm/HeaderForm';
 import BreedsPanel from '../pages/BreedsPanel/BreedsPanel';
 import BreedInfo from '../pages/BreedInfo/BreedInfo';
-
 import GalleryPanel from 'pages/GalleryPanel/GalleryPanel';
 import VotingPanel from 'pages/VotingPanel/VotingPanel';
+import UploadPanel from 'pages/UploadPanel/UploadPanel';
 
 export const App = () => {
   const [query, setQuery] = useState('');
@@ -41,22 +41,11 @@ export const App = () => {
             <Route path="breeds/:breedId" element={<BreedInfo />} />
             <Route path="gallery" element={<GalleryPanel />} />
             <Route path="voting" element={<VotingPanel />} />
+
             <Route path="*" element={<NotFound />} />
           </Route>
+          <Route path="upload" element={<UploadPanel />} />
         </Routes>
-        {/* {mode !== 'start' && <HeaderForm onBreedSearch={handleSearch} />}
-          {mode === 'start' && (
-            <StartImage />
-          )} 
-          {mode === 'breeds' && currentBreed === '' && (
-            <BreedsPanel onImageClick={handleBreedClick} />
-          )}
-          {mode === 'breeds' && currentBreed !== '' && (
-            <BreedInfo breedId={currentBreed} />
-          )}*/}
-        {/* {items.length > 0 && (
-          <Gallery items={items} handleClick={handleClick} />
-        )} */}
       </SectionWrapper>
     </Main>
   );
