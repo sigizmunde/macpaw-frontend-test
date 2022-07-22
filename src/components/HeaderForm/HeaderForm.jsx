@@ -8,39 +8,45 @@ import {
   SearchBtn,
 } from './HeaderForm.styled';
 import Icons from 'images/icons/symbol-defs.svg';
+import { useNavigate } from 'react-router-dom';
 
-const HeaderForm = ({ onBreedSearch }) => {
+const HeaderForm = () => {
   const [breedSearch, setBreedSearch] = useState('');
+  const navigate = useNavigate();
 
-  const onBreedInput = e => {
+  const handleSearch = e => {
+    e.preventDefault();
+    !!breedSearch && navigate(`/search/?query=${breedSearch.toLowerCase()}`);
+    setBreedSearch(''); //-------------
+  };
+
+  const handleInput = e => {
     setBreedSearch(e.target.value);
   };
 
-  const onBreedClick = () => {
-    onBreedSearch(breedSearch);
-    setBreedSearch('');
-  };
-
   return (
-    <HeaderDiv>
+    <HeaderDiv onSubmit={handleSearch}>
       <MenuBtn>
         <Svg>
           <use href={Icons + '#icon-menu'} />
         </Svg>
       </MenuBtn>
+
       <Label>
         <Input
           type="text"
-          name="breedSearch"
+          name="query"
+          autoComplete="off"
           value={breedSearch}
-          onChange={onBreedInput}
+          onChange={handleInput}
         />
-        <SearchBtn type="button" onClick={onBreedClick}>
+        <SearchBtn type="submit" onClick={handleSearch}>
           <Svg>
             <use href={Icons + '#icon-search-20'} />
           </Svg>
         </SearchBtn>
       </Label>
+
       <PanelBtn type="button">
         <Svg>
           <use href={Icons + '#icon-like-30'} />

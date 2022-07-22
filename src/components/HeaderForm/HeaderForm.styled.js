@@ -1,7 +1,7 @@
 import { FadedBtn, PanelBtn } from 'components/StyledBlocks/StyledBlocks';
 import styled from 'styled-components';
 
-export const HeaderDiv = styled.div`
+export const HeaderDiv = styled.form`
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;

@@ -19,5 +19,7 @@ export const Main = styled.main`
   background-color: var(--back-color);
   color: var(--main-text-color);
   height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
   overflow: hidden;
 `;

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Outlet, Route, Routes } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Outlet, Route, Routes, useSearchParams } from 'react-router-dom';
 import css from './App.module.css';
 import { Main, SectionWrapper } from './SectionWrapper/SectionWrapper';
 import NotFound from './NotFound/NotFound';
@@ -13,12 +13,7 @@ import VotingPanel from 'pages/VotingPanel/VotingPanel';
 import UploadPanel from 'pages/UploadPanel/UploadPanel';
 
 export const App = () => {
-  const [query, setQuery] = useState('');
   const [darkTheme, setDarkTheme] = useState(false);
-
-  const handleSearch = search => {
-    setQuery(search);
-  };
 
   const toggleDarkTheme = () => setDarkTheme(dark => !dark);
 
@@ -32,7 +27,7 @@ export const App = () => {
             path="/"
             element={
               <>
-                <HeaderForm onBreedSearch={handleSearch} />
+                <HeaderForm />
                 <Outlet />
               </>
             }
