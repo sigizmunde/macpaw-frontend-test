@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import {
-  // deleteFav,
+  deleteFav,
   fetchBreedList,
-  // fetchFavs,
-  fetchImages,
-  // postImageFav,
+  fetchFavParamImages,
+  postImageFav,
 } from 'api-service/api';
 import { SearchImagesFormWrapper, SmallCaption } from './GalleryPanel.styled';
 import BackBtn from 'components/BackBtn/BackBtn';
@@ -57,47 +56,6 @@ const GalleryPanel = () => {
   const [order, setOrder] = useState(orderArray[0].id);
   const [type, setType] = useState(typeArray[0].id);
 
-  // const [favArr, setFavArr] = useState([]);
-
-  // useEffect(() => {
-  //   fetchFavs().then(response => {
-  //     console.log(response.data);
-  //     setFavArr(
-  //       response.data.map(({ id, image_id }) => ({ id, imageId: image_id }))
-  //     );
-  //   });
-  // }, []);
-
-  // const getFavIndex = imageId => {
-  //   return favArr.find(item => item.imageId === imageId)?.id || null;
-  // };
-
-  // const postFav = imageId => {
-  //   postImageFav({ id: imageId })
-  //     .then(response => {
-  //       if (response && response.data.message === 'SUCCESS')
-  //         console.log(response);
-  //       setFavArr(favArr => [
-  //         ...favArr,
-  //         { id: response.data.id, imageId: imageId },
-  //       ]);
-  //     })
-  //     .catch(err => console.error(err));
-  // };
-
-  // const removeFav = imageId => {
-  //   const fav = getFavIndex(imageId);
-  //   deleteFav({ id: fav })
-  //     .then(response => {
-  //       if (response && response.data.message === 'SUCCESS') {
-  //         setFavArr(favArr => {
-  //           return favArr.filter(item => item.imageId !== imageId);
-  //         });
-  //       }
-  //     })
-  //     .catch(err => console.error(err));
-  // };
-
   useEffect(() => {
     setPage(0);
   }, [breedId, limit, type, order]);
@@ -105,13 +63,14 @@ const GalleryPanel = () => {
   const handleUpdate = () => {
     async function loadingImages() {
       setIsLoading(true);
-      const { data, itemsCount } = await fetchImages({
+      const { data, itemsCount } = await fetchFavParamImages({
         breedId,
         limit,
         page,
         order,
         type,
       });
+      console.log('data is', data);
       setImages(data);
       setImgCount(itemsCount);
       setIsLoading(false);
@@ -134,7 +93,40 @@ const GalleryPanel = () => {
     handleUpdate();
   };
 
-  const handleClickGallery = () => {};
+  const postFav = image => {
+    postImageFav({ id: image.id })
+      .then(response => {
+        if (response && response.data.message === 'SUCCESS') {
+          setImages(images =>
+            images.map(item => {
+              if (item.id === image.id) item.fav_id = response.data.id;
+              return item;
+            })
+          );
+        }
+      })
+      .catch(err => console.error(err));
+  };
+
+  const removeFav = image => {
+    deleteFav({ id: image.fav_id })
+      .then(response => {
+        if (response && response.data.message === 'SUCCESS') {
+          setImages(images =>
+            images.map(item => {
+              if (item.id === image.id) item.fav_id = -1;
+              return item;
+            })
+          );
+        }
+      })
+      .catch(err => console.error(err));
+  };
+
+  const handleClickGallery = image => {
+    if (image.fav_id > -1) removeFav(image);
+    else postFav(image);
+  };
 
   async function getBreeds() {
     const data = await fetchBreedList();

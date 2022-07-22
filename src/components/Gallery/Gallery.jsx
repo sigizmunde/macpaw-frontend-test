@@ -9,20 +9,24 @@ const Gallery = ({
 }) => {
   return (
     <GalleryList>
-      {items.map(({ id, url, width, height, breeds }) => (
-        <GalleryItem
-          key={id}
-          id={id}
-          imageURL={url}
-          width={width}
-          height={height}
-          onClick={() => handleClick(breeds[0]?.id || '')}
-          hoverContent={
-            hoverContent || `'${breeds[0]?.name}'` || 'not specified'
-          }
-          hoverCentered={hoverCentered}
-        />
-      ))}
+      {items.map(image => {
+        const { id, url, width, height, breeds, fav_id } = image;
+        return (
+          <GalleryItem
+            key={id}
+            id={id}
+            imageURL={url}
+            width={width}
+            height={height}
+            fav={fav_id && fav_id > -1 ? true : false}
+            onClick={() => handleClick(image)}
+            hoverContent={
+              hoverContent || `'${breeds[0]?.name}'` || 'not specified'
+            }
+            hoverCentered={hoverCentered}
+          />
+        );
+      })}
       <TailPlaceholder />
     </GalleryList>
   );

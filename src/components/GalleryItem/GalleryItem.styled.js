@@ -47,7 +47,8 @@ export const GalleryLi = styled.li`
       font-size: 16px;
       line-height: 1.5;
       color: var(--accent-color);
-      background-color: var(--panel-back-color);
+      background-color: ${prop =>
+        prop.fav ? 'var(--accent-color)' : 'var(--panel-back-color)'};
     }
   }
   img {

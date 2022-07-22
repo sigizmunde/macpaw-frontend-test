@@ -75,7 +75,8 @@ const BreedsPanel = () => {
 
   const navigate = useNavigate();
 
-  const handleClick = imageBreedId => {
+  const handleClick = image => {
+    const imageBreedId = image.breeds[0]?.id || '';
     navigate(`${imageBreedId}`);
   };
 
@@ -90,7 +91,6 @@ const BreedsPanel = () => {
           <SelectInput
             items={breedArray}
             placeholder="select a breed"
-            // initialIndex={0}
             width="40%"
             onPick={setBreedId}
           />

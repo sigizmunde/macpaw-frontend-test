@@ -6,6 +6,7 @@ const GalleryItem = ({
   width,
   height,
   onClick,
+  fav = false,
   hoverContent = '',
   hoverCentered = true,
 }) => {
@@ -16,6 +17,7 @@ const GalleryItem = ({
       widthKoef={Number.parseInt(width) / Number.parseInt(height)}
       hoverContent={hoverContent}
       hoverCentered={hoverCentered}
+      fav={fav}
     >
       <div>
         <Img src={imageURL} alt="preview" />
