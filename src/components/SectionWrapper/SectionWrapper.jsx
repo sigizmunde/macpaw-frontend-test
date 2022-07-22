@@ -9,7 +9,6 @@ export const SectionWrapper = styled.div`
   flex-wrap: nowrap;
   justify-content: stretch;
   gap: 0;
-  overflow: hidden;
 `;
 
 export const Main = styled.main`
