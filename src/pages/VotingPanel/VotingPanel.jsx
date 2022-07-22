@@ -20,11 +20,10 @@ import {
 } from './VotingPanel.styled';
 import Icons from 'images/icons/symbol-defs.svg';
 import {
-  fetchImages,
   postImageFav,
   postImageVote,
   deleteFav,
-  fetchFavs,
+  fetchFavParamImages,
 } from 'api-service/api';
 import Loader from 'components/Loader/Loader';
 
@@ -35,15 +34,13 @@ const VotingPanel = () => {
     breeds: [{ name: '' }],
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [fav, setFav] = useState('');
-  const [favArr, setFavArr] = useState([]);
   const [log, setLog] = useState(
     JSON.parse(localStorage.getItem('logDog')) || []
   );
 
   const getRandomImage = () => {
     setIsLoading(true);
-    fetchImages({ limit: 1 })
+    fetchFavParamImages({ limit: 1 })
       .then(response => {
         setImage(response.data[0]);
       })
@@ -58,42 +55,28 @@ const VotingPanel = () => {
   }, []);
 
   useEffect(() => {
-    console.log(log);
     localStorage.setItem('logDog', JSON.stringify(log));
   }, [log]);
 
   const createLogItem = ({ eventType, imageId }) => {
     const dateTime = new Date();
-    setLog(log => [{ date: dateTime, id: imageId, event: eventType }, ...log]);
+    setLog(log => [
+      {
+        key: '' + dateTime + Math.random(),
+        date: dateTime,
+        id: imageId,
+        event: eventType,
+      },
+      ...log,
+    ]);
   };
-
-  useEffect(() => {
-    fetchFavs().then(response => {
-      console.log(response.data);
-      setFavArr(
-        response.data.map(({ id, image_id }) => ({ id, imageId: image_id }))
-      );
-    });
-  }, []);
-
-  useEffect(() => {
-    const isFaved = favArr.filter(({ imageId }) => imageId === image.id);
-    if (isFaved.length > 0) {
-      setFav(isFaved[0].id);
-    } else {
-      setFav('');
-    }
-  }, [favArr, image]);
 
   const postFav = () => {
     postImageFav({ id: image.id })
       .then(response => {
-        if (response && response.data.message === 'SUCCESS')
-          console.log(response);
-        setFavArr(favArr => [
-          ...favArr,
-          { id: response.data.id, imageId: image.id },
-        ]);
+        if (response && response.data.message === 'SUCCESS') {
+          image.fav_id = response.data.id;
+        }
       })
       .then(() => {
         createLogItem({ imageId: image.id, eventType: 'fav' });
@@ -102,12 +85,10 @@ const VotingPanel = () => {
   };
 
   const removeFav = () => {
-    deleteFav({ id: fav })
+    deleteFav({ id: image.fav_id })
       .then(response => {
         if (response && response.data.message === 'SUCCESS') {
-          setFavArr(favArr => {
-            return favArr.filter(({ imageId }) => imageId !== image.id);
-          });
+          image.fav_id = -1;
         }
       })
       .then(() => {
@@ -117,7 +98,7 @@ const VotingPanel = () => {
   };
 
   const toggleFav = () => {
-    if (!fav) postFav();
+    if (image.fav_id < 0) postFav();
     else removeFav();
   };
 
@@ -165,7 +146,7 @@ const VotingPanel = () => {
             </LikeControlBtn>
             <FavControlBtn onClick={toggleFav}>
               <Svg>
-                {fav ? (
+                {image.fav_id > -1 ? (
                   <use href={Icons + '#icon-fav-filled-30'} />
                 ) : (
                   <use href={Icons + '#icon-fav-30'} />
@@ -182,7 +163,7 @@ const VotingPanel = () => {
 
         <LogList>
           {log.length > 0 &&
-            log.map(({ date, id, event }) => {
+            log.map(({ key, date, id, event }) => {
               let messageString;
               let iconHref = null;
               switch (event) {
@@ -205,7 +186,7 @@ const VotingPanel = () => {
                   break;
               }
               return (
-                <LogItem key={date}>
+                <LogItem key={key}>
                   <TimeStamp>
                     {new Date(date).getHours()}:{new Date(date).getMinutes()}
                   </TimeStamp>

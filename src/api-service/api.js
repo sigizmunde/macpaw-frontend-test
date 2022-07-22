@@ -6,10 +6,13 @@ const API_BASE_URL = 'https://api.thedogapi.com/v1';
 axios.defaults.baseURL = API_BASE_URL;
 axios.defaults.headers['x-api-key'] = API_KEY;
 
-// export async function fetchDogImages() {
-//   const rawData = await axios.get(`/images/search?size=full`);
-//   return rawData.data;
-// }
+//-----------------favorites-cashed-array-----------------
+let favArr = null;
+
+export function getCashedFavs() {
+  return favArr;
+}
+//--------------------------------------------------------
 
 export async function fetchBreedList() {
   const rawData = await axios.get(`/breeds`);
@@ -61,7 +64,9 @@ export async function postImageFav({ id, sub_id = '' }) {
   if (sub_id) data.sub_id = sub_id;
   try {
     const status = await axios.post('/favourites', data);
-    console.log(status);
+    if (status.data.message === 'SUCCESS') {
+      favArr = [...favArr, { id: status.data.id, imageId: id }];
+    }
     return status;
   } catch (err) {
     console.error(err);
@@ -71,7 +76,9 @@ export async function postImageFav({ id, sub_id = '' }) {
 export async function deleteFav({ id }) {
   try {
     const status = await axios.delete(`/favourites/${id}`);
-    console.log(status);
+    if (status.data.message === 'SUCCESS') {
+      favArr = favArr.filter(item => item.id !== id);
+    }
     return status;
   } catch (err) {
     console.error(err);
@@ -107,4 +114,23 @@ export async function postImageFile(file) {
     }
     console.error(err);
   }
+}
+
+export async function fetchFavParamImages(params) {
+  const img_response = await fetchImages(params);
+  const fav_response = await fetchFavs();
+  if (!favArr) {
+    favArr = fav_response.data.map(({ id, image_id }) => ({
+      id,
+      imageId: image_id,
+    }));
+  }
+  const imageArray = img_response.data.map(
+    ({ id, breeds, width, height, url }) => {
+      const fav_id = favArr.find(item => item.imageId === id)?.id || -1;
+      return { id, breeds, width, height, url, fav_id };
+    }
+  );
+  img_response.data = imageArray;
+  return img_response;
 }

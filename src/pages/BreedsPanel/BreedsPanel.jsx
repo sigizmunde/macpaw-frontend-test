@@ -28,14 +28,14 @@ const BreedsPanel = () => {
   const [breedId, setBreedId] = useState('');
   const [limit, setLimit] = useState('10');
   const [page, setPage] = useState(0);
-  const [sorting, setSorting] = useState('RAND');
+  const [order, setOrder] = useState('RAND');
   const [imgCount, setImgCount] = useState(0);
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setPage(0);
-  }, [breedId, sorting, limit]);
+  }, [breedId, order, limit]);
 
   useEffect(() => {
     if (breedId !== '') {
@@ -43,7 +43,7 @@ const BreedsPanel = () => {
         setIsLoading(true);
         const { data, itemsCount } = await fetchImages({
           breedId,
-          order: sorting,
+          order,
           limit,
           page,
         });
@@ -53,7 +53,7 @@ const BreedsPanel = () => {
       }
       loadingImages();
     }
-  }, [breedId, sorting, limit, page]);
+  }, [breedId, order, limit, page]);
 
   async function getBreeds() {
     const data = await fetchBreedList();
@@ -66,11 +66,11 @@ const BreedsPanel = () => {
   }, []);
 
   const toggleSortingAsc = () => {
-    setSorting(sorting => (sorting !== 'ASC' ? 'ASC' : 'RAND'));
+    setOrder(sorting => (sorting !== 'ASC' ? 'ASC' : 'RAND'));
   };
 
   const toggleSortingDesc = () => {
-    setSorting(sorting => (sorting !== 'DESC' ? 'DESC' : 'RAND'));
+    setOrder(sorting => (sorting !== 'DESC' ? 'DESC' : 'RAND'));
   };
 
   const navigate = useNavigate();
@@ -101,12 +101,12 @@ const BreedsPanel = () => {
             width="101px"
             onPick={setLimit}
           />
-          <ChkBtn checked={sorting === 'ASC'} setChecked={toggleSortingAsc}>
+          <ChkBtn checked={order === 'ASC'} setChecked={toggleSortingAsc}>
             <Svg>
               <use href={Icons + '#icon-sort-20'} />
             </Svg>
           </ChkBtn>
-          <ChkBtn checked={sorting === 'DESC'} setChecked={toggleSortingDesc}>
+          <ChkBtn checked={order === 'DESC'} setChecked={toggleSortingDesc}>
             <Svg>
               <use href={Icons + '#icon-sort-revert-20'} />
             </Svg>
@@ -116,7 +116,7 @@ const BreedsPanel = () => {
         {images.length > 0 && (
           <Gallery items={images} handleClick={handleClick} />
         )}
-        {sorting !== 'RAND' && (
+        {order !== 'RAND' && (
           <Pagination>
             {page > 0 && (
               <PagBtn type="button" onClick={() => setPage(page => page - 1)}>
@@ -136,7 +136,7 @@ const BreedsPanel = () => {
             )}
           </Pagination>
         )}
-        {sorting === 'RAND' && (
+        {order === 'RAND' && (
           <Pagination>
             {imgCount > Number.parseInt(limit) && (
               <PagBtn type="button" onClick={() => setPage(page => page + 1)}>

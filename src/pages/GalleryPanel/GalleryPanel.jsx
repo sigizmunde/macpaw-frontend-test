@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react';
-import { fetchBreedList, fetchImages } from 'api-service/api';
+import {
+  // deleteFav,
+  fetchBreedList,
+  // fetchFavs,
+  fetchImages,
+  // postImageFav,
+} from 'api-service/api';
 import { SearchImagesFormWrapper, SmallCaption } from './GalleryPanel.styled';
 import BackBtn from 'components/BackBtn/BackBtn';
 import Gallery from 'components/Gallery/Gallery';
@@ -29,7 +35,7 @@ const limitArray = [
 ];
 
 const orderArray = [
-  { id: 'random', value: 'Random' },
+  { id: 'RAND', value: 'Random' },
   { id: 'DESC', value: 'Desc' },
   { id: 'ASC', value: 'Asc' },
 ];
@@ -50,6 +56,47 @@ const GalleryPanel = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [order, setOrder] = useState(orderArray[0].id);
   const [type, setType] = useState(typeArray[0].id);
+
+  // const [favArr, setFavArr] = useState([]);
+
+  // useEffect(() => {
+  //   fetchFavs().then(response => {
+  //     console.log(response.data);
+  //     setFavArr(
+  //       response.data.map(({ id, image_id }) => ({ id, imageId: image_id }))
+  //     );
+  //   });
+  // }, []);
+
+  // const getFavIndex = imageId => {
+  //   return favArr.find(item => item.imageId === imageId)?.id || null;
+  // };
+
+  // const postFav = imageId => {
+  //   postImageFav({ id: imageId })
+  //     .then(response => {
+  //       if (response && response.data.message === 'SUCCESS')
+  //         console.log(response);
+  //       setFavArr(favArr => [
+  //         ...favArr,
+  //         { id: response.data.id, imageId: imageId },
+  //       ]);
+  //     })
+  //     .catch(err => console.error(err));
+  // };
+
+  // const removeFav = imageId => {
+  //   const fav = getFavIndex(imageId);
+  //   deleteFav({ id: fav })
+  //     .then(response => {
+  //       if (response && response.data.message === 'SUCCESS') {
+  //         setFavArr(favArr => {
+  //           return favArr.filter(item => item.imageId !== imageId);
+  //         });
+  //       }
+  //     })
+  //     .catch(err => console.error(err));
+  // };
 
   useEffect(() => {
     setPage(0);
@@ -177,34 +224,38 @@ const GalleryPanel = () => {
             hoverCentered={true}
           />
         )}
-        <Pagination>
-          {page > 0 && (
-            <PagBtn
-              type="button"
-              onClick={() => {
-                handlePrevPage();
-              }}
-            >
-              <Svg>
-                <use href={Icons + '#icon-back-20'} />
-              </Svg>
-              <span>prev</span>
-            </PagBtn>
-          )}
-          {page < Math.floor(imgCount / Number.parseInt(limit)) && (
-            <PagBtn
-              type="button"
-              onClick={() => {
-                handleNextPage();
-              }}
-            >
-              <span>next</span>
-              <Svg180>
-                <use href={Icons + '#icon-back-20'} />
-              </Svg180>
-            </PagBtn>
-          )}
-        </Pagination>
+        {order !== 'RAND' && (
+          <Pagination>
+            {page > 0 && (
+              <PagBtn type="button" onClick={handlePrevPage}>
+                <Svg>
+                  <use href={Icons + '#icon-back-20'} />
+                </Svg>
+                <span>prev</span>
+              </PagBtn>
+            )}
+            {page < Math.floor(imgCount / Number.parseInt(limit)) && (
+              <PagBtn type="button" onClick={handleNextPage}>
+                <span>next</span>
+                <Svg180>
+                  <use href={Icons + '#icon-back-20'} />
+                </Svg180>
+              </PagBtn>
+            )}
+          </Pagination>
+        )}
+        {order === 'RAND' && (
+          <Pagination>
+            {imgCount > Number.parseInt(limit) && (
+              <PagBtn type="button" onClick={handleNextPage}>
+                <span>Load more random pics</span>
+                <Svg180>
+                  <use href={Icons + '#icon-back-20'} />
+                </Svg180>
+              </PagBtn>
+            )}
+          </Pagination>
+        )}
       </ContentPanel>
     </PanelWrapper>
   );
