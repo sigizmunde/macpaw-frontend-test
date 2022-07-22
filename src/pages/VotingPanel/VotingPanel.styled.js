@@ -144,6 +144,7 @@ export const TimeStamp = styled.div`
   color: var(--main-text-color);
   background-color: var(--panel-back-color);
   border-radius: 10px;
+  text-align: center;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
