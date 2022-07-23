@@ -27,4 +27,4 @@ Created on React
 
 ## performed by Illya Bondar
 
-### Feel free to contact me via Telegram @iliyabinocular or +380687072531
+Feel free to contact me via Telegram @iliyabinocular or +380687072531
