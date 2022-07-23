@@ -134,3 +134,19 @@ export async function fetchFavParamImages(params) {
   img_response.data = imageArray;
   return img_response;
 }
+
+export function createLogItem({ eventType, imageId }) {
+  let log = JSON.parse(sessionStorage.getItem('logDog')) || [];
+  const dateTime = new Date();
+  log = [
+    {
+      key: '' + dateTime + Math.random(),
+      date: dateTime,
+      id: imageId,
+      event: eventType,
+    },
+    ...log,
+  ];
+  sessionStorage.setItem('logDog', JSON.stringify(log));
+  return log;
+}

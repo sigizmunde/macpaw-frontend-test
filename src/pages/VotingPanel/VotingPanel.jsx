@@ -12,10 +12,7 @@ import {
   FavControlBtn,
   ImageContainer,
   LikeControlBtn,
-  LogItem,
-  LogList,
   OverlayControlPanel,
-  TimeStamp,
   VotingWrapper,
 } from './VotingPanel.styled';
 import Icons from 'images/icons/symbol-defs.svg';
@@ -24,8 +21,10 @@ import {
   postImageVote,
   deleteFav,
   fetchFavParamImages,
+  createLogItem,
 } from 'api-service/api';
 import Loader from 'components/Loader/Loader';
+import Log from 'components/LogList/LogList';
 
 const VotingPanel = () => {
   const [image, setImage] = useState({
@@ -35,7 +34,7 @@ const VotingPanel = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [log, setLog] = useState(
-    JSON.parse(localStorage.getItem('logDog')) || []
+    JSON.parse(sessionStorage.getItem('logDog')) || []
   );
 
   const getRandomImage = () => {
@@ -55,21 +54,8 @@ const VotingPanel = () => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('logDog', JSON.stringify(log));
+    sessionStorage.setItem('logDog', JSON.stringify(log));
   }, [log]);
-
-  const createLogItem = ({ eventType, imageId }) => {
-    const dateTime = new Date();
-    setLog(log => [
-      {
-        key: '' + dateTime + Math.random(),
-        date: dateTime,
-        id: imageId,
-        event: eventType,
-      },
-      ...log,
-    ]);
-  };
 
   const postFav = () => {
     postImageFav({ id: image.id })
@@ -79,7 +65,7 @@ const VotingPanel = () => {
         }
       })
       .then(() => {
-        createLogItem({ imageId: image.id, eventType: 'fav' });
+        setLog(createLogItem({ imageId: image.id, eventType: 'fav' }));
       })
       .catch(err => console.error(err));
   };
@@ -92,7 +78,7 @@ const VotingPanel = () => {
         }
       })
       .then(() => {
-        createLogItem({ imageId: image.id, eventType: 'unfav' });
+        setLog(createLogItem({ imageId: image.id, eventType: 'unfav' }));
       })
       .catch(err => console.error(err));
   };
@@ -111,10 +97,12 @@ const VotingPanel = () => {
         getRandomImage();
       })
       .then(() => {
-        createLogItem({
-          imageId: image.id,
-          eventType: value ? 'vote-up' : 'vote-down',
-        });
+        setLog(
+          createLogItem({
+            imageId: image.id,
+            eventType: value ? 'vote-up' : 'vote-down',
+          })
+        );
       })
       .catch(err => console.error(err));
   };
@@ -161,49 +149,7 @@ const VotingPanel = () => {
           </OverlayControlPanel>
         </VotingWrapper>
 
-        <LogList>
-          {log.length > 0 &&
-            log.map(({ key, date, id, event }) => {
-              let messageString;
-              let iconHref = null;
-              switch (event) {
-                case 'fav':
-                  messageString = 'was added to Favourites';
-                  iconHref = Icons + '#icon-fav-color-20';
-                  break;
-                case 'unfav':
-                  messageString = 'was removed from Favourites';
-                  break;
-                case 'vote-up':
-                  messageString = 'was added to Likes';
-                  iconHref = Icons + '#icon-like-color-20';
-                  break;
-                case 'vote-down':
-                  messageString = 'was added to Dislikes';
-                  iconHref = Icons + '#icon-dislike-color-20';
-                  break;
-                default:
-                  break;
-              }
-              return (
-                <LogItem key={key}>
-                  <TimeStamp>
-                    {new Date(date).getHours()}:{new Date(date).getMinutes()}
-                  </TimeStamp>
-                  <div>
-                    Image ID: <span>{id}</span> {messageString}
-                  </div>
-                  <div>
-                    {iconHref && (
-                      <Svg>
-                        <use href={iconHref} />
-                      </Svg>
-                    )}
-                  </div>
-                </LogItem>
-              );
-            })}
-        </LogList>
+        <Log log={log} />
       </ContentPanel>
     </PanelWrapper>
   );
