@@ -19,6 +19,23 @@ export async function fetchBreedList() {
   return rawData.data;
 }
 
+export async function searchBreeds({ q }) {
+  const rawData = await axios.get(`/breeds/search?q=${q}`);
+  console.log(q);
+  return rawData.data;
+}
+
+export async function fetchImage({ image_id }) {
+  try {
+    const rawData = await axios.get(`/images/${image_id}`);
+    return {
+      data: rawData.data,
+    };
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 export async function fetchImages({
   breedId = '-1',
   limit = 10,
@@ -48,10 +65,10 @@ export async function fetchImages({
 }
 
 export async function postImageVote({ id, sub_id = '', value = 1 }) {
-  const data = { image_id: id, value };
-  if (sub_id) data.sub_id = sub_id;
+  const params = { image_id: id, value };
+  if (sub_id) params.sub_id = sub_id;
   try {
-    const status = await axios.post('/votes', data);
+    const status = await axios.post('/votes', params);
     console.log(status);
     return status;
   } catch (err) {
@@ -59,11 +76,34 @@ export async function postImageVote({ id, sub_id = '', value = 1 }) {
   }
 }
 
-export async function postImageFav({ id, sub_id = '' }) {
-  const data = { image_id: id };
-  if (sub_id) data.sub_id = sub_id;
+export async function deleteImageVote({ id, sub_id = '' }) {
+  const params = { id };
+  if (sub_id) params.sub_id = sub_id;
   try {
-    const status = await axios.post('/favourites', data);
+    const status = await axios.delete(`/votes/${id}`);
+    return status;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export async function fetchVotes({ limit = 10, page = 0 }) {
+  try {
+    const rawData = await axios.get(`/votes/?limit=${limit}&page=${page}`);
+    return {
+      data: rawData.data,
+      itemsCount: rawData.headers['pagination-count'],
+    };
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export async function postImageFav({ id, sub_id = '' }) {
+  const params = { image_id: id };
+  if (sub_id) params.sub_id = sub_id;
+  try {
+    const status = await axios.post('/favourites', params);
     if (status.data.message === 'SUCCESS') {
       favArr = [...favArr, { id: status.data.id, imageId: id }];
     }
@@ -77,7 +117,9 @@ export async function deleteFav({ id }) {
   try {
     const status = await axios.delete(`/favourites/${id}`);
     if (status.data.message === 'SUCCESS') {
-      favArr = favArr.filter(item => item.id !== id);
+      if (favArr) {
+        favArr = favArr.filter(item => item.id !== id);
+      }
     }
     return status;
   } catch (err) {
@@ -97,9 +139,9 @@ export async function fetchFavs() {
 }
 
 export async function postImageFile(file) {
-  const data = { file: file };
+  const params = { file: file };
   try {
-    const rawData = await axios.post('/images/upload', data, {
+    const rawData = await axios.post('/images/upload', params, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

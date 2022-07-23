@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Outlet, Route, Routes, useSearchParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Outlet, Route, Routes } from 'react-router-dom';
 import css from './App.module.css';
 import { Main, SectionWrapper } from './SectionWrapper/SectionWrapper';
 import NotFound from './NotFound/NotFound';
@@ -11,6 +11,7 @@ import BreedInfo from '../pages/BreedInfo/BreedInfo';
 import GalleryPanel from 'pages/GalleryPanel/GalleryPanel';
 import VotingPanel from 'pages/VotingPanel/VotingPanel';
 import UploadPanel from 'pages/UploadPanel/UploadPanel';
+import CategoryPanel from 'pages/CategoryPanel/CategoryPanel';
 
 export const App = () => {
   const [darkTheme, setDarkTheme] = useState(false);
@@ -36,6 +37,17 @@ export const App = () => {
             <Route path="breeds/:breedId" element={<BreedInfo />} />
             <Route path="gallery" element={<GalleryPanel />} />
             <Route path="voting" element={<VotingPanel />} />
+
+            <Route path="search" element={<CategoryPanel mode="search" />} />
+            <Route path="likes" element={<CategoryPanel mode="likes" />} />
+            <Route
+              path="dislikes"
+              element={<CategoryPanel mode="dislikes" />}
+            />
+            <Route
+              path="favourites"
+              element={<CategoryPanel mode="favourites" />}
+            />
 
             <Route path="*" element={<NotFound />} />
           </Route>

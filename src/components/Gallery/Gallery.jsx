@@ -21,7 +21,8 @@ const Gallery = ({
             fav={fav_id && fav_id > -1 ? true : false}
             onClick={() => handleClick(image)}
             hoverContent={
-              hoverContent || `'${breeds[0]?.name}'` || 'not specified'
+              hoverContent ||
+              (breeds ? `'${breeds[0].name}'` : `'not specified'`)
             }
             hoverCentered={hoverCentered}
           />

@@ -6,6 +6,7 @@ import {
   Label,
   Input,
   SearchBtn,
+  HeaderNavLink,
 } from './HeaderForm.styled';
 import Icons from 'images/icons/symbol-defs.svg';
 import { useNavigate } from 'react-router-dom';
@@ -16,8 +17,12 @@ const HeaderForm = () => {
 
   const handleSearch = e => {
     e.preventDefault();
-    !!breedSearch && navigate(`/search/?query=${breedSearch.toLowerCase()}`);
+    !!breedSearch &&
+      navigate(`/search/?query=${breedSearch.toLowerCase()}`, {
+        replace: true,
+      });
     setBreedSearch(''); //-------------
+    document.location.reload();
   };
 
   const handleInput = e => {
@@ -47,21 +52,27 @@ const HeaderForm = () => {
         </SearchBtn>
       </Label>
 
-      <PanelBtn type="button">
-        <Svg>
-          <use href={Icons + '#icon-like-30'} />
-        </Svg>
-      </PanelBtn>
-      <PanelBtn type="button">
-        <Svg>
-          <use href={Icons + '#icon-fav-30'} />
-        </Svg>
-      </PanelBtn>
-      <PanelBtn type="button">
-        <Svg>
-          <use href={Icons + '#icon-dislike-30'} />
-        </Svg>
-      </PanelBtn>
+      <HeaderNavLink to="likes">
+        <PanelBtn type="button">
+          <Svg>
+            <use href={Icons + '#icon-like-30'} />
+          </Svg>
+        </PanelBtn>
+      </HeaderNavLink>
+      <HeaderNavLink to="favourites">
+        <PanelBtn type="button">
+          <Svg>
+            <use href={Icons + '#icon-fav-30'} />
+          </Svg>
+        </PanelBtn>
+      </HeaderNavLink>
+      <HeaderNavLink to="dislikes">
+        <PanelBtn type="button">
+          <Svg>
+            <use href={Icons + '#icon-dislike-30'} />
+          </Svg>
+        </PanelBtn>
+      </HeaderNavLink>
     </HeaderDiv>
   );
 };

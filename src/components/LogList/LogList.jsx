@@ -2,9 +2,9 @@ import { LogItem, LogList, TimeStamp } from './LogList.styled';
 import Icons from 'images/icons/symbol-defs.svg';
 import { Svg } from 'components/StyledBlocks/StyledBlocks';
 
-const Log = ({ log }) => {
+const Log = ({ log, height = '100%' }) => {
   return (
-    <LogList>
+    <LogList style={{ height: height }}>
       {log.length > 0 &&
         log.map(({ key, date, id, event }) => {
           let messageString;
@@ -24,6 +24,9 @@ const Log = ({ log }) => {
             case 'vote-down':
               messageString = 'was added to Dislikes';
               iconHref = Icons + '#icon-dislike-color-20';
+              break;
+            case 'unvote':
+              messageString = 'was removed from vote list';
               break;
             default:
               break;

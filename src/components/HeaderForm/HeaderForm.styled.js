@@ -1,4 +1,5 @@
 import { FadedBtn, PanelBtn } from 'components/StyledBlocks/StyledBlocks';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const HeaderDiv = styled.form`
@@ -40,4 +41,11 @@ export const SearchBtn = styled(FadedBtn)`
   top: 50%;
   right: 15px;
   transform: translateY(-50%);
+`;
+
+export const HeaderNavLink = styled(NavLink)`
+  &.active > button {
+    color: var(--inverted-text-color);
+    background-color: var(--accent-color);
+  }
 `;
