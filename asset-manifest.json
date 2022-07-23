@@ -1,17 +1,21 @@
 {
   "files": {
-    "main.css": "/macpaw-frontend-test/static/css/main.a2d9edfc.css",
-    "main.js": "/macpaw-frontend-test/static/js/main.00c48130.js",
-    "static/media/images-search.png": "/macpaw-frontend-test/static/media/images-search.84d2a57c6cccbe29c184.png",
-    "static/media/vote-table.png": "/macpaw-frontend-test/static/media/vote-table.e6f99ca0db4420b380aa.png",
-    "static/media/pet-breeds.png": "/macpaw-frontend-test/static/media/pet-breeds.73388e1af3dae57a8adc.png",
-    "static/media/logo.svg": "/macpaw-frontend-test/static/media/logo.7e6f2b14dc8c41cdc71f06c3b95bf2c9.svg",
-    "index.html": "/macpaw-frontend-test/index.html",
-    "main.a2d9edfc.css.map": "/macpaw-frontend-test/static/css/main.a2d9edfc.css.map",
-    "main.00c48130.js.map": "/macpaw-frontend-test/static/js/main.00c48130.js.map"
+    "main.css": "/static/css/main.5857d7e1.css",
+    "main.js": "/static/js/main.c10da1f1.js",
+    "static/media/start.png": "/static/media/start.8a8ef0d2a5fab7f60f72.png",
+    "static/media/images-search.png": "/static/media/images-search.84d2a57c6cccbe29c184.png",
+    "static/media/vote-table.png": "/static/media/vote-table.e6f99ca0db4420b380aa.png",
+    "static/media/pet-breeds.png": "/static/media/pet-breeds.73388e1af3dae57a8adc.png",
+    "static/media/symbol-defs.svg": "/static/media/symbol-defs.e252b4a6774ee1d9dfe4b9181709a570.svg",
+    "static/media/logo.svg": "/static/media/logo.7e6f2b14dc8c41cdc71f06c3b95bf2c9.svg",
+    "static/media/rotate.svg": "/static/media/rotate.b0ce1659711d374992b3b62a3117950b.svg",
+    "index.html": "/index.html",
+    "static/media/upload-file-icon.svg": "/static/media/upload-file-icon.e558d49591d8e9be9a27db5aa4034a09.svg",
+    "main.5857d7e1.css.map": "/static/css/main.5857d7e1.css.map",
+    "main.c10da1f1.js.map": "/static/js/main.c10da1f1.js.map"
   },
   "entrypoints": [
-    "static/css/main.a2d9edfc.css",
-    "static/js/main.00c48130.js"
+    "static/css/main.5857d7e1.css",
+    "static/js/main.c10da1f1.js"
   ]
 }
