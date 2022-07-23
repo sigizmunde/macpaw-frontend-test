@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+  createLogItem,
   deleteFav,
   fetchBreedList,
   fetchFavParamImages,
@@ -124,8 +125,13 @@ const GalleryPanel = () => {
   };
 
   const handleClickGallery = image => {
-    if (image.fav_id > -1) removeFav(image);
-    else postFav(image);
+    if (image.fav_id > -1) {
+      removeFav(image);
+      createLogItem({ imageId: image.id, eventType: 'unfav' });
+    } else {
+      postFav(image);
+      createLogItem({ imageId: image.id, eventType: 'fav' });
+    }
   };
 
   async function getBreeds() {
