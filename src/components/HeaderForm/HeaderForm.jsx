@@ -22,7 +22,6 @@ const HeaderForm = ({ handleShowMenu }) => {
         replace: true,
       });
     setBreedSearch('');
-    document.location.reload();
   };
 
   const handleInput = e => {
