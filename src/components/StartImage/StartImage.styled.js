@@ -1,6 +1,13 @@
+import { SectionWrapper } from 'components/SectionWrapper/SectionWrapper';
 import { Panel } from 'components/StyledBlocks/StyledBlocks';
 import { maxTablet } from 'components/utility/breakpoints';
 import styled from 'styled-components';
+
+export const StartSectionWrapper = styled(SectionWrapper)`
+  @media screen and (max-width: ${maxTablet}px) {
+    display: none;
+  }
+`;
 
 export const StartPanel = styled(Panel)`
   margin: 10px;
@@ -9,9 +16,9 @@ export const StartPanel = styled(Panel)`
   overflow: visible;
   width: calc(100% - 20px);
   background-color: var(--faded-accent-color);
-  @media screen and (max-width: ${maxTablet}px) {
+  /* @media screen and (max-width: ${maxTablet}px) {
     display: none;
-  }
+  } */
 `;
 
 export const StartImg = styled.img`

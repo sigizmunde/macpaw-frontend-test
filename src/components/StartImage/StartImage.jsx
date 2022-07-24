@@ -1,13 +1,12 @@
-import { SectionWrapper } from 'components/SectionWrapper/SectionWrapper';
-import { StartPanel, StartImg } from './StartImage.styled';
+import { StartPanel, StartImg, StartSectionWrapper } from './StartImage.styled';
 
 const StartImage = () => {
   return (
-    <SectionWrapper>
+    <StartSectionWrapper>
       <StartPanel>
         <StartImg src={require('../../images/start.png')} alt="head image" />
       </StartPanel>
-    </SectionWrapper>
+    </StartSectionWrapper>
   );
 };
 
