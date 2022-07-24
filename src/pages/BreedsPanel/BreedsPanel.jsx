@@ -8,11 +8,18 @@ import {
   PanelWrapper,
   Svg,
   Svg180,
+  FlipFlex,
 } from 'components/StyledBlocks/StyledBlocks';
 import Icons from 'images/icons/symbol-defs.svg';
 import SelectInput from 'components/SelectInput/SelectInput';
 import Gallery from 'components/Gallery/Gallery';
-import { ContentPanel, Pagination, PagBtn } from './BreedsPanel.styled';
+import {
+  ContentPanel,
+  Pagination,
+  PagBtn,
+  MobilePlaceholder,
+  FlexGroup,
+} from './BreedsPanel.styled';
 import Loader from 'components/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
 
@@ -88,29 +95,32 @@ const BreedsPanel = () => {
           <TextBtn type="button" disabled>
             Breeds
           </TextBtn>
+          {/* <MobilePlaceholder /> */}
           <SelectInput
             items={breedArray}
             placeholder="select a breed"
-            width="40%"
+            width="100%"
             onPick={setBreedId}
           />
-          <SelectInput
-            items={limitArray}
-            placeholder=" "
-            initialIndex={1}
-            width="101px"
-            onPick={setLimit}
-          />
-          <ChkBtn checked={order === 'ASC'} setChecked={toggleSortingAsc}>
-            <Svg>
-              <use href={Icons + '#icon-sort-20'} />
-            </Svg>
-          </ChkBtn>
-          <ChkBtn checked={order === 'DESC'} setChecked={toggleSortingDesc}>
-            <Svg>
-              <use href={Icons + '#icon-sort-revert-20'} />
-            </Svg>
-          </ChkBtn>
+          <FlexGroup>
+            <SelectInput
+              items={limitArray}
+              placeholder=" "
+              initialIndex={1}
+              width="101px"
+              onPick={setLimit}
+            />
+            <ChkBtn checked={order === 'ASC'} setChecked={toggleSortingAsc}>
+              <Svg>
+                <use href={Icons + '#icon-sort-20'} />
+              </Svg>
+            </ChkBtn>
+            <ChkBtn checked={order === 'DESC'} setChecked={toggleSortingDesc}>
+              <Svg>
+                <use href={Icons + '#icon-sort-revert-20'} />
+              </Svg>
+            </ChkBtn>
+          </FlexGroup>
         </FormWrapper>
         {isLoading && <Loader />}
         {images.length > 0 && (

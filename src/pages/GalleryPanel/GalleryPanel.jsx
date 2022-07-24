@@ -6,7 +6,11 @@ import {
   fetchFavParamImages,
   postImageFav,
 } from 'api-service/api';
-import { SearchImagesFormWrapper, SmallCaption } from './GalleryPanel.styled';
+import {
+  SearchImagesFormWrapper,
+  SmallCaption,
+  UploadBtn,
+} from './GalleryPanel.styled';
 import BackBtn from 'components/BackBtn/BackBtn';
 import Gallery from 'components/Gallery/Gallery';
 import Loader from 'components/Loader/Loader';
@@ -157,12 +161,12 @@ const GalleryPanel = () => {
           </TextBtn>
           <div style={{ marginLeft: 'auto' }} />
           <Link to="/upload/">
-            <TextBtn type="button">
+            <UploadBtn type="button">
               <Svg>
                 <use href={Icons + '#icon-upload-16'} />
               </Svg>
               Upload
-            </TextBtn>
+            </UploadBtn>
           </Link>
         </FormWrapper>
         <SearchImagesFormWrapper>

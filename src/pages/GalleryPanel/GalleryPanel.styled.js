@@ -1,4 +1,6 @@
 import { Field } from 'components/SelectInput/SelectInput.styled';
+import { TextBtn } from 'components/StyledBlocks/StyledBlocks';
+import { maxMobile } from 'components/utility/breakpoints';
 import styled from 'styled-components';
 
 export const SmallCaption = styled.p`
@@ -26,5 +28,12 @@ export const SearchImagesFormWrapper = styled.div`
     ${Field} {
       background-color: var(--panel-back-color);
     }
+  }
+`;
+
+export const UploadBtn = styled(TextBtn)`
+  @media screen and (max-width: ${maxMobile}) {
+    width: 100%;
+    flex-grow: 1;
   }
 `;

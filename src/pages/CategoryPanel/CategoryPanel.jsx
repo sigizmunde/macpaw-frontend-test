@@ -45,6 +45,10 @@ const CategoryPanel = ({ mode }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    setPage(0);
+  }, [mode]);
+
+  useEffect(() => {
     setShowLog(false);
   }, [mode, page, searchParams]);
 

@@ -1,3 +1,4 @@
+import { maxMobile } from 'components/utility/breakpoints';
 import styled from 'styled-components';
 
 export const PanelWrapper = styled.div`
@@ -5,6 +6,9 @@ export const PanelWrapper = styled.div`
   height: 100%;
   padding: 10px;
   overflow: auto;
+  @media screen and (max-width: ${maxMobile}px) {
+    padding: 0;
+  }
 `;
 
 export const Panel = styled.div`
@@ -15,13 +19,22 @@ export const Panel = styled.div`
   background-color: var(--panel-back-color);
   border-radius: 20px;
   overflow: hidden;
+  @media screen and (max-width: ${maxMobile}px) {
+    padding: 10px;
+  }
 `;
 
 export const FormWrapper = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   gap: 10px;
   margin-bottom: 10px;
+  @media screen and (max-width: ${maxMobile}px) {
+    padding: 0;
+    flex-wrap: wrap;
+    justify-content: start;
+  }
 `;
 
 export const Btn = styled.button`
@@ -100,6 +113,7 @@ export const TextBtn = styled(Btn)`
   font-size: 100%;
   padding-left: 30px;
   padding-right: 30px;
+  min-width: 92px;
   :focus {
     padding-left: 28px;
     padding-right: 28px;
@@ -133,4 +147,18 @@ export const Svg = styled.svg`
 
 export const Svg180 = styled(Svg)`
   transform: rotate(180deg);
+`;
+
+export const FlipFlex = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+  justify-content: stretch;
+  width: 100%;
+  margin-bottom: 10px;
+  @media screen and (max-width: ${maxMobile}px) {
+    flex-direction: row-reverse;
+    flex-wrap: wrap-reverse;
+  }
 `;

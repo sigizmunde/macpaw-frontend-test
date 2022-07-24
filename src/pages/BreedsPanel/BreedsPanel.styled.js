@@ -1,4 +1,5 @@
 import { Btn, Panel } from 'components/StyledBlocks/StyledBlocks';
+import { minTablet } from 'components/utility/breakpoints';
 import styled from 'styled-components';
 
 export const Pagination = styled.div`
@@ -30,7 +31,23 @@ export const PagBtn = styled(Btn)`
   }
 `;
 
+export const MobilePlaceholder = styled.div`
+  margin: 0 auto;
+  width: 100%;
+  flex-grow: 1;
+  @media screen and (min-width: ${minTablet}) {
+    display: none;
+  }
+`;
+
+export const FlexGroup = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 10px;
+`;
+
 export const ContentPanel = styled(Panel)`
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: stretch;

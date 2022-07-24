@@ -1,4 +1,5 @@
 import { FadedBtn, PanelBtn } from 'components/StyledBlocks/StyledBlocks';
+import { maxMobile, minDesktop } from 'components/utility/breakpoints';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -10,11 +11,19 @@ export const HeaderDiv = styled.form`
   width: 100%;
   margin: 0;
   padding: 10px 10px 0 10px;
+  @media screen and (max-width: ${maxMobile}px) {
+    padding: 0;
+    flex-wrap: wrap;
+    justify-content: start;
+  }
 `;
 
 export const MenuBtn = styled(PanelBtn)`
-  @media (min-width: 1024px) {
+  @media screen and (min-width: ${minDesktop}px) {
     display: none;
+  }
+  @media screen and (max-width: ${maxMobile}px) {
+    position: absolute;
   }
 `;
 

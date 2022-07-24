@@ -12,9 +12,11 @@ import GalleryPanel from 'pages/GalleryPanel/GalleryPanel';
 import VotingPanel from 'pages/VotingPanel/VotingPanel';
 import UploadPanel from 'pages/UploadPanel/UploadPanel';
 import CategoryPanel from 'pages/CategoryPanel/CategoryPanel';
+import MobileMenu from './MobileMenu/MobileMenu';
 
 export const App = () => {
   const [darkTheme, setDarkTheme] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   const toggleDarkTheme = () => setDarkTheme(dark => !dark);
 
@@ -28,8 +30,14 @@ export const App = () => {
             path="/"
             element={
               <>
-                <HeaderForm />
+                <HeaderForm handleShowMenu={setShowMenu} />
                 <Outlet />
+                {showMenu && (
+                  <MobileMenu
+                    handleDarkTheme={toggleDarkTheme}
+                    handleShowMenu={setShowMenu}
+                  />
+                )}
               </>
             }
           >

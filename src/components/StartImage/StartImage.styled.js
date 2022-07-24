@@ -1,4 +1,5 @@
 import { Panel } from 'components/StyledBlocks/StyledBlocks';
+import { maxTablet } from 'components/utility/breakpoints';
 import styled from 'styled-components';
 
 export const StartPanel = styled(Panel)`
@@ -8,6 +9,9 @@ export const StartPanel = styled(Panel)`
   overflow: visible;
   width: calc(100% - 20px);
   background-color: var(--faded-accent-color);
+  @media screen and (max-width: ${maxTablet}px) {
+    display: none;
+  }
 `;
 
 export const StartImg = styled.img`
