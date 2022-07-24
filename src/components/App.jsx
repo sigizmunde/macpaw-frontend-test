@@ -23,45 +23,41 @@ export const App = () => {
   return (
     <Main className={darkTheme && css.darktheme}>
       <ControlSection handleDarkTheme={toggleDarkTheme} />
-      <SectionWrapper>
-        <Routes>
-          <Route index element={<StartImage />} />
+
+      <Routes>
+        <Route index element={<StartImage />} />
+        <Route
+          path="/"
+          element={
+            <SectionWrapper>
+              <HeaderForm handleShowMenu={setShowMenu} />
+              <Outlet />
+              {showMenu && (
+                <MobileMenu
+                  handleDarkTheme={toggleDarkTheme}
+                  handleShowMenu={setShowMenu}
+                />
+              )}
+            </SectionWrapper>
+          }
+        >
+          <Route path="breeds" element={<BreedsPanel />} />
+          <Route path="breeds/:breedId" element={<BreedInfo />} />
+          <Route path="gallery" element={<GalleryPanel />} />
+          <Route path="voting" element={<VotingPanel />} />
+
+          <Route path="search" element={<CategoryPanel mode="search" />} />
+          <Route path="likes" element={<CategoryPanel mode="likes" />} />
+          <Route path="dislikes" element={<CategoryPanel mode="dislikes" />} />
           <Route
-            path="/"
-            element={
-              <>
-                <HeaderForm handleShowMenu={setShowMenu} />
-                <Outlet />
-                {showMenu && (
-                  <MobileMenu
-                    handleDarkTheme={toggleDarkTheme}
-                    handleShowMenu={setShowMenu}
-                  />
-                )}
-              </>
-            }
-          >
-            <Route path="breeds" element={<BreedsPanel />} />
-            <Route path="breeds/:breedId" element={<BreedInfo />} />
-            <Route path="gallery" element={<GalleryPanel />} />
-            <Route path="voting" element={<VotingPanel />} />
+            path="favourites"
+            element={<CategoryPanel mode="favourites" />}
+          />
 
-            <Route path="search" element={<CategoryPanel mode="search" />} />
-            <Route path="likes" element={<CategoryPanel mode="likes" />} />
-            <Route
-              path="dislikes"
-              element={<CategoryPanel mode="dislikes" />}
-            />
-            <Route
-              path="favourites"
-              element={<CategoryPanel mode="favourites" />}
-            />
-
-            <Route path="*" element={<NotFound />} />
-          </Route>
-          <Route path="upload" element={<UploadPanel />} />
-        </Routes>
-      </SectionWrapper>
+          <Route path="*" element={<NotFound />} />
+        </Route>
+        <Route path="upload" element={<UploadPanel />} />
+      </Routes>
     </Main>
   );
 };
