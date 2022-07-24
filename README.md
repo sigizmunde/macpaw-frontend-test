@@ -13,7 +13,7 @@ Created on React
 
 1. Some images do not fit in frames properly
 2. Select field does not allow filtering by keyboard typing
-3. Duplicated request calls on components mount
+3. Breed info carousel now has only tiny point buttons to operate
 
 ## Known API issues
 
