@@ -21,7 +21,7 @@ export async function fetchBreedList() {
 
 export async function searchBreeds({ q }) {
   const rawData = await axios.get(`/breeds/search?q=${q}`);
-  console.log(q);
+  // console.log(q);
   return rawData.data;
 }
 
@@ -52,7 +52,7 @@ export async function fetchImages({
         : '&mime_types=gif'
       : ''
   }`;
-  console.log(queryString);
+  // console.log(queryString);
   try {
     const rawData = await axios.get(queryString);
     return {
@@ -69,7 +69,7 @@ export async function postImageVote({ id, sub_id = '', value = 1 }) {
   if (sub_id) params.sub_id = sub_id;
   try {
     const status = await axios.post('/votes', params);
-    console.log(status);
+    // console.log(status);
     return status;
   } catch (err) {
     console.error(err);

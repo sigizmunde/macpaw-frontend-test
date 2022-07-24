@@ -75,7 +75,7 @@ const GalleryPanel = () => {
         order,
         type,
       });
-      console.log('data is', data);
+      // console.log('data is', data);
       setImages(data);
       setImgCount(itemsCount);
       setIsLoading(false);

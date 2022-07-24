@@ -92,7 +92,7 @@ const VotingPanel = () => {
     postImageVote({ id: image.id, value: value })
       .then(response => {
         if (response && response.data.message === 'SUCCESS') {
-          console.log('successfuly voted ', value);
+          // console.log('successfuly voted ', value);
         }
         getRandomImage();
       })

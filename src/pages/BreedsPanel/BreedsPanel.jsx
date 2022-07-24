@@ -8,7 +8,6 @@ import {
   PanelWrapper,
   Svg,
   Svg180,
-  FlipFlex,
 } from 'components/StyledBlocks/StyledBlocks';
 import Icons from 'images/icons/symbol-defs.svg';
 import SelectInput from 'components/SelectInput/SelectInput';
@@ -17,7 +16,6 @@ import {
   ContentPanel,
   Pagination,
   PagBtn,
-  MobilePlaceholder,
   FlexGroup,
 } from './BreedsPanel.styled';
 import Loader from 'components/Loader/Loader';

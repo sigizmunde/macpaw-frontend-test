@@ -84,7 +84,7 @@ const CategoryPanel = ({ mode }) => {
         ({ id, image_id }) =>
           !data.find(e => e.image_id === image_id && e.id !== id)
       );
-      console.log('filteredData', filteredData);
+      //   console.log('filteredData', filteredData);
       try {
         setImgCount(filteredData.length);
         let imageArray = [];
@@ -95,7 +95,7 @@ const CategoryPanel = ({ mode }) => {
           const imageResponse = await fetchImage({
             image_id,
           });
-          console.log(imageResponse);
+          //   console.log(imageResponse);
           imageResponse.data.fav_id = id;
           imageArray = [...imageArray, imageResponse.data];
         }
@@ -126,7 +126,7 @@ const CategoryPanel = ({ mode }) => {
           const imageResponse = await fetchImage({
             image_id,
           });
-          console.log(imageResponse);
+          //   console.log(imageResponse);
           imageResponse.data.vote_id = id;
           imageArray = [...imageArray, imageResponse.data];
           if (
@@ -137,7 +137,7 @@ const CategoryPanel = ({ mode }) => {
           }
         }
         setImages(imageArray);
-        console.log(imageArray);
+        // console.log(imageArray);
       } catch (err) {
         console.error(err.message);
       } finally {
