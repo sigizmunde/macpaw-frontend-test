@@ -20,7 +20,9 @@ export async function fetchBreedList() {
 }
 
 export async function searchBreeds({ q }) {
-  const rawData = await axios.get(`/breeds/search?q=${q}`);
+  const rawData = await axios.get('/breeds/search', {
+    params: { q: String(q).trim().toLowerCase() },
+  });
   // console.log(q);
   return rawData.data;
 }
