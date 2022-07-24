@@ -11,11 +11,9 @@ Created on React
 
 ## Known issues
 
-1. When refreshing page with parameters wia browser refresh button it falls into
-   an infinite loop (happens on deployed page only). 
-2. Some images do not fit in frames properly
-3. Select field does not allow filtering by keyboard typing
-4. Duplicated request calls on components mount
+1. Some images do not fit in frames properly
+2. Select field does not allow filtering by keyboard typing
+3. Duplicated request calls on components mount
 
 ## Known API issues
 
